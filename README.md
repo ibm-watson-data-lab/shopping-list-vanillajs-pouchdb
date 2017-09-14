@@ -1,12 +1,6 @@
+# Shopping List - with Vanilla JavaScript and PouchDB 
 
-## Tools
-
-- Vanilla JavaScript
-- http://materializecss.com/ - Materialize CSS
-- https://pouchdb.com/ - PouchDB library
-- https://usecuid.org/ - Collision-resistant ids
-
-# Shopping List - with Vanilla JavaScript and PouchDB
+**Note:** This is a work in progress. 
 
 Shopping List is an Offline First demo Progressive Web App built using [PouchDB](https://pouchdb.com/) and no additional JavsScript framework. [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
 
@@ -43,7 +37,10 @@ Shopping List is a simple demo app, with a limited feature set. Here is a list o
 
 ## App Architecture
 
-\<Information detailing the app architecture; for using this app as a reference implementation\>
+- Vanilla JavaScript
+- http://materializecss.com/ - Materialize CSS
+- https://pouchdb.com/ - PouchDB library
+- https://usecuid.org/ - Collision-resistant ids
 
 ## Live Demo
 
