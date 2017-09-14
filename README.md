@@ -12,8 +12,6 @@ Shopping List is an Offline First demo Progressive Web App built using [PouchDB]
 
 ## Quick Start
 
-To see this app in action without installing anything, simply visit https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb in a web browser or mobile device.
-
 - Clone this GitHub [repo](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
 - Open the `index.html` in your browser
 
@@ -49,4 +47,4 @@ Shopping List is a simple demo app, with a limited feature set. Here is a list o
 
 ## Live Demo
 
-To see this app in action without installing anything, simply visit https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb in a web browser or mobile device.
+To see this app in action without installing anything, simply visit https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb/index.html in a web browser or mobile device.
