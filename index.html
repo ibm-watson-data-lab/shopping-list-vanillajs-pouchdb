@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="application-name" content="Shopping List">
+    <meta name="description" content="An Offline First demo of a shopping list using vanilla JavaScript and PouchDB">
+    <meta name="keywords" content="Offline First,HTML,CSS,XML,JavaScript,PouchDB">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Shopping List | vanilla JavaScript | PouchDB</title>
+
+    <!-- Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- <link rel="icon" sizes="192x192" href="images/android-desktop.png"> -->
+
+    <!-- Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <!-- <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png"> -->
+
+    <!-- <link rel="shortcut icon" href="images/favicon.png"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
+    <link rel="stylesheet" href="css/shoppinglist.css">
+  </head>
+  <body class="grey lighten-4">
+
+    <!-- banner -->
+    <header class="navbar-fixed">
+      <nav class="blue accent-2">
+        <div class="nav-wrapper">
+          <span class="brand-logo left">
+            <a href="#" onclick="shopper.goto()" class="goback"><i class="material-icons">keyboard_backspace</i></a>
+            <a id="header-title" href="#">Shopping List</a>
+          </span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- content area -->
+    <main>
+      <div id="shopping-lists">
+        <!-- shopping lists get inserted here -->
+      </div>
+      <ul id="shopping-list-items" class="collection">
+        <!-- shopping list items get inserted here -->
+      </ul>
+      <!-- add more stuff button -->
+      <button id="add-button" class="btn-floating btn-large waves-effect waves-light red right modal-trigger" onclick="shopper.add()">
+        <i class="material-icons">add</i>
+      </button>
+    </main>
+
+    <!-- modal: add a shopping list form -->
+    <div id="shopping-list-add" class="modal bottom-sheet">
+      <div class="modal-content">
+          <h5>Create a Shopping List</h5>
+          <form class="col s12 white">
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="title" type="text" class="validate" placeholder="Enter a title for the shopping list" required onkeydown="shopper.handlekey(event, 'shopping-list-save')">
+              </div>
+              <input name="type" type="hidden" value="list">
+            </div>
+            <!-- TODO: add place/geo -->
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-flat blue-text accent-2-text" onclick="shopper.closemodal()">Cancel</button>
+        <button id="shopping-list-save" class="btn-flat blue-text accent-2-text" onclick="shopper.save('shopping-list-add')">Save</button>
+      </div>
+    </div>
+    
+    <!-- modal: add a shopping list item form -->
+    <div id="shopping-list-item-add" class="modal bottom-sheet">
+      <div class="modal-content">
+        <h5>Add an Item</h5>
+        <form class="col s12 white">
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="title" type="text" class="validate" placeholder="Enter an item to add to the shopping list" required>
+            </div>
+            <input name="type" type="hidden" value="item">
+          </div>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-flat blue-text accent-2-text" onclick="shopper.closemodal()">Cancel</button>
+          <button class="btn-flat blue-text accent-2-text" onclick="shopper.save('shopping-list-item-add')">Save</button>
+        </div>
+    </div>
+
+    <!-- modal: overlay -->
+    <div class="modal-overlay" onclick="shopper.closemodal()"></div>
+
+    <!-- template: shopping list -->
+    <script type="text/template" id="shopping-list-template">
+      <div class="list-view collapsible">
+        <div class="card-content" onclick="shopper.goto('{{_id}}', '{{title}}', event)">
+          <span class="card-title activator grey-text text-darken-4">{{title}}<i class="material-icons right grey-text darken-3-text" onclick="shopper.toggle('{{_sanitizedid}}', event)">more_vert</i></span>
+          <p class="grey-text text-lighten-1">{{place.title}}</p>
+        </div>
+        <div class="card-action">
+          <input type="checkbox" id="checked-list-{{_sanitizedid}}" name="checked-list-{{_sanitizedid}}" {{_checked}} disabled/>
+          <label for="checked-list-{{_sanitizedid}}">0 items in list</label>
+        </div>
+      </div>
+      <div class="list-edit collapsible closed">
+        <div class="card-content">
+          <span class="card-title grey-text darken-3-text"><i class="material-icons right" onclick="shopper.toggle('{{_sanitizedid}}', event)">close</i></span>
+          <form id="form-{{_sanitizedid}}" class="col s12 white">
+            <div class="row">
+              <div class="input-field col s12">
+                <input name="title" type="text" class="validate" value="{{title}}" required>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-action">
+          <button class="btn-flat blue-text accent-2-text" onclick="shopper.remove('{{_id}}')">Remove</button>
+          <button class="btn-flat blue-text accent-2-text" onclick="shopper.save('{{_id}}')">Save</button>
+        </div>
+      </div>
+    </script>
+
+    <!-- template: shopping list item -->
+    <script type="text/template" id="shopping-list-item">
+        <div class="item-view collapsible">
+          <input type="checkbox" id="checked-item-{{_sanitizedid}}" name="checked-item-{{_sanitizedid}}" {{_checked}} onclick="shopper.save('{{_id}}')" value="{{title}}"/>
+          <label for="checked-item-{{_sanitizedid}}">{{title}}</label>
+          <i class="material-icons right more grey-text darken-3-text" onclick="shopper.toggle('{{_sanitizedid}}', event)">more_vert</i>
+        </div>
+        <div class="item-edit collapsible closed">
+            <div>
+              <span class="card-title grey-text darken-3-text"><i class="material-icons right less" onclick="shopper.toggle('{{_sanitizedid}}', event)">close</i></span>
+              <form id="form-{{_sanitizedid}}" class="col s12 white">
+                <div class="row">
+                  <div class="input-field col s12">
+                    <input name="title" type="text" class="validate" value="{{title}}" required>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="card-action">
+              <button class="btn-flat blue-text accent-2-text" onclick="shopper.remove('{{_id}}')">Remove</button>
+              <button class="btn-flat blue-text accent-2-text" onclick="shopper.save('{{_id}}')">Save</button>
+            </div>
+        </div>
+    </script>
+
+    <!-- javascript goodies -->
+    <script src="js/browser-cuid.min.js"></script>
+    <script src="js/pouchdb-6.3.4.min.js"></script>
+    <script src="js/pouchdb.find.js"></script>
+    <script src="js/shopper.js"></script>
+    <script src="js/shopper.model.js"></script>
+  </body>
+</html>

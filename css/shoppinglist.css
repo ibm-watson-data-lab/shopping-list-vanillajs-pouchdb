@@ -1,0 +1,143 @@
+body {
+  overflow-x: hidden;
+}
+
+.goback {
+  visibility: hidden;
+}
+
+body[data-list-id] .goback {
+  visibility: initial;
+}
+
+nav .nav-wrapper {
+  padding-left: 10px;
+}
+
+main {
+  margin: 0 auto;
+  min-height: calc(100vh - 85px);
+  width: 200vw;
+}
+
+main #add-button {
+  position: fixed;
+  bottom: 45px;
+  right: 45px;
+}
+
+main .card {
+  margin: 1rem 0;
+}
+
+#shopping-lists,
+#shopping-list-items  {
+  display: inline-block;
+  padding: 0 5%;
+  transition-property: transform;
+  transition-duration: 0.5s;
+  width: 99vw;
+}
+
+#shopping-list-items {
+  background-color: #FFFFFF;
+  border: 0 none;
+  min-height: calc(100vh - 65px);
+  padding: 15px 40px 150px 25px;
+  vertical-align: top;
+}
+
+#shopping-list-items .card-action {
+  border: 0 none;
+  padding-top: 0;
+}
+
+.list-edit .card-action,
+.item-edit .card-action {
+  text-align: right;
+}
+
+#shopping-lists .card-content {
+  cursor: pointer;
+}
+
+#shopping-list-items .card,
+#shopping-list-items .card .collapsible {
+  border: 0 none;
+  box-shadow: initial;
+}
+
+#shopping-list-items .collection-item {
+  border-bottom: 1px solid #DDDDDD;
+  padding: 24px;
+}
+
+#shopping-list-items .card label {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: initial;
+}
+
+.collection-item input:checked ~ label {
+  text-decoration: line-through;
+}
+
+.collection-item input:checked ~ i.more {
+  visibility: hidden;
+}
+
+.collection-item input:not(:checked) ~ label {
+  color: #212121;
+}
+
+.collapsible {
+  overflow-y: hidden;
+  margin: 0;
+	max-height: calc(100vh - 65px);
+	transition-property: all;
+	transition-duration: .55s;
+}
+
+.collapsible.closed {
+	max-height: 0;
+	transition-property: all;
+	transition-duration: .15s;
+}
+
+.card.collapsible {
+	transition-duration: 2s;
+}
+
+body.shopping-list-add #shopping-list-add.bottom-sheet,
+body.shopping-list-item-add #shopping-list-item-add.bottom-sheet {
+  z-index: 1007;
+  display: block;
+  bottom: 0px;
+  opacity: 1;
+	transition-property: bottom;
+	transition-duration: .75s;
+}
+
+body.shopping-list-add .modal-overlay,
+body.shopping-list-item-add .modal-overlay {
+  display: block;
+  opacity: 0.5;
+	transition-property: all;
+	transition-duration: 0.25s;
+  z-index: 1006; 
+}
+
+body[data-list-id] #shopping-lists,
+body[data-list-id] #shopping-list-items {
+  transform: translate(-99vw);
+}
+
+body[data-list-id] .more,
+body[data-list-id] .less {
+  cursor: pointer;
+}
+
+[type="checkbox"]:disabled:not(:checked) + label::before {
+  border: 2px solid rgba(0, 0, 0, 0.42);
+  background-color: transparent;
+}
