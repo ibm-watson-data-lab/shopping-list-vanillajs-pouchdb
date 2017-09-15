@@ -1,14 +1,14 @@
 /* global self, caches, fetch */
 'use strict'
 
-var cachename = 'shopping-list-vanillajs-pouchdb-0.0.3'
+var cachename = 'shopping-list-vanillajs-pouchdb-0.0.4'
 var urlstocache = [
   '/',
   '/index.html',
-  '/iconfont/MaterialIcons-Regular.ttf',
-  '/iconfont/MaterialIcons-Regular.woff',
-  '/iconfont/MaterialIcons-Regular.woff2',
-  '/iconfont/MaterialIcons-Regular.eot',
+  '/fonts/materialicons/MaterialIcons-Regular.ttf',
+  '/fonts/materialicons/MaterialIcons-Regular.woff',
+  '/fonts/materialicons/MaterialIcons-Regular.woff2',
+  '/fonts/materialicons/MaterialIcons-Regular.eot',
   '/css/materialize.min.css',
   '/css/shoppinglist.css',
   '/favicons/android-chrome-192x192.png',
