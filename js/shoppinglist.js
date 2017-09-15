@@ -249,9 +249,16 @@
     },
 
     handlekey: function (event, triggerid) {
-      if (event && (event.which === 13 || event.keyCode === 13)) {
-        event.stopPropagation()
-        document.getElementById(triggerid).click()
+      if (event) {
+        if (event.currentTarget.tagName.toLowerCase() === 'body' && (event.which === 37 || event.keyCode === 37 || event.which === 39 || event.keyCode === 39)) {
+          event.stopPropagation()
+          event.preventDefault()
+        } else {
+          if (event.which === 13 || event.keyCode === 13) {
+            event.stopPropagation()
+            document.getElementById(triggerid).click()
+          }
+        }
       }
       return false
     }
