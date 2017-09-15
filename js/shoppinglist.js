@@ -39,14 +39,13 @@
 
       var listdiv = document.createElement(isItem ? 'li' : 'div')
       listdiv.id = doc._sanitizedid
-      listdiv.className = 'card ' + (isItem ? 'collection-item' : 'collapsible')
+      listdiv.className = 'card ' + (isItem ? 'collection-item' : 'collapsible') + ' closed'
       listdiv.innerHTML = template
 
       var existingdiv = document.getElementById(doc._sanitizedid)
-      if (isItem && existingdiv) {
+      if (existingdiv) {
         shoppinglists.replaceChild(listdiv, existingdiv)
       } else {
-        listdiv.className += ' closed'
         shoppinglists.insertBefore(listdiv, shoppinglists.firstChild)
       }
 
@@ -192,10 +191,9 @@
               model.save(doc, function (err, updated) {
                 if (err) {
                   console.error(err)
-                } else if (!listid) {
-                  removeFromList(id)
+                } else {
+                  addToList([doc])
                 }
-                addToList([doc])
               })
             }
           })

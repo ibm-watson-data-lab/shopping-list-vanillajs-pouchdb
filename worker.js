@@ -1,29 +1,29 @@
 /* global self, caches, fetch */
 'use strict'
 
-var cachename = 'shopping-list-vanillajs-pouchdb-0.0.5'
+var cachename = 'shopping-list-vanillajs-pouchdb-0.0.1'
 var urlstocache = [
-  '/shopping-list-vanillajs-pouchdb/',
-  '/shopping-list-vanillajs-pouchdb/index.html',
-  '/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.ttf',
-  '/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.woff',
-  '/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.woff2',
-  '/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.eot',
-  '/shopping-list-vanillajs-pouchdb/css/materialize.min.css',
-  '/shopping-list-vanillajs-pouchdb/css/shoppinglist.css',
-  '/shopping-list-vanillajs-pouchdb/favicons/android-chrome-192x192.png',
-  '/shopping-list-vanillajs-pouchdb/favicons/android-chrome-512x512.png',
-  '/shopping-list-vanillajs-pouchdb/favicons/apple-touch-icon.png',
-  '/shopping-list-vanillajs-pouchdb/favicons/favicon-16x16.png',
-  '/shopping-list-vanillajs-pouchdb/favicons/favicon-32x32.png',
-  '/shopping-list-vanillajs-pouchdb/favicons/favicon.ico',
-  '/shopping-list-vanillajs-pouchdb/favicons/mstile-150x150.png',
-  '/shopping-list-vanillajs-pouchdb/favicons/safari-pinned-tab.svg',
-  '/shopping-list-vanillajs-pouchdb/js/browser-cuid.min.js',
-  '/shopping-list-vanillajs-pouchdb/js/pouchdb-6.3.4.min.js',
-  '/shopping-list-vanillajs-pouchdb/js/pouchdb.find.js',
-  '/shopping-list-vanillajs-pouchdb/js/shoppinglist.js',
-  '/shopping-list-vanillajs-pouchdb/js/shoppinglist.model.js'
+  '/',
+  'index.html',
+  'fonts/materialicons/MaterialIcons-Regular.ttf',
+  'fonts/materialicons/MaterialIcons-Regular.woff',
+  'fonts/materialicons/MaterialIcons-Regular.woff2',
+  'fonts/materialicons/MaterialIcons-Regular.eot',
+  'css/materialize.min.css',
+  'css/shoppinglist.css',
+  'favicons/android-chrome-192x192.png',
+  'favicons/android-chrome-512x512.png',
+  'favicons/apple-touch-icon.png',
+  'favicons/favicon-16x16.png',
+  'favicons/favicon-32x32.png',
+  'favicons/favicon.ico',
+  'favicons/mstile-150x150.png',
+  'favicons/safari-pinned-tab.svg',
+  'js/browser-cuid.min.js',
+  'js/pouchdb-6.3.4.min.js',
+  'js/pouchdb.find.js',
+  'js/shoppinglist.js',
+  'js/shoppinglist.model.js'
 ]
 
 // install/cache page assets

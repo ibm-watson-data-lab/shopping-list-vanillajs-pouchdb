@@ -3,12 +3,12 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.eot);
+  src: url(../fonts/materialicons/MaterialIcons-Regular.eot);
   src: local('Material Icons'),
     local('MaterialIcons-Regular'),
-    url(https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.woff2) format('woff2'),
-    url(https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.woff) format('woff'),
-    url(https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb/fonts/materialicons/MaterialIcons-Regular.ttf) format('truetype');
+    url(../fonts/materialicons/MaterialIcons-Regular.woff2) format('woff2'),
+    url(../fonts/materialicons/MaterialIcons-Regular.woff) format('woff'),
+    url(../fonts/materialicons/MaterialIcons-Regular.ttf) format('truetype');
 }
 .material-icons {
   font-family: 'Material Icons';
@@ -172,6 +172,5 @@ body[data-list-id] .less {
 }
 
 [type="checkbox"]:disabled:not(:checked) + label::before {
-  border: 2px solid rgba(0, 0, 0, 0.42);
-  background-color: transparent;
+  display: none;
 }
