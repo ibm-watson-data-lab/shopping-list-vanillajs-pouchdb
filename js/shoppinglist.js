@@ -248,7 +248,7 @@
 
     handlekey: function (event, triggerid) {
       if (event) {
-        if (event.currentTarget.tagName.toLowerCase() === 'body' && (event.which === 37 || event.keyCode === 37 || event.which === 39 || event.keyCode === 39)) {
+        if (event.target.tagName.toLowerCase() === 'body' && (event.which === 37 || event.keyCode === 37 || event.which === 39 || event.keyCode === 39)) {
           event.stopPropagation()
           event.preventDefault()
         } else {
