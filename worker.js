@@ -1,7 +1,7 @@
 /* global self, caches, fetch */
 'use strict'
 
-var cachename = 'shopping-list-vanillajs-pouchdb-0.0.1'
+var cachename = 'shopping-list-vanillajs-pouchdb-0.0.2'
 var urlstocache = [
   '/',
   'index.html',
