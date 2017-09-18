@@ -9,6 +9,35 @@
     return id.replace(/(:)/gi, '-')
   }
 
+  // focus on title input of the form and move cursor to end of input
+  var formFocus = function (node) {
+    if (typeof node === 'string') {
+      node = document.getElementById(node)
+    }
+
+    if (node.className.indexOf('closed') === -1) {
+      if (node.tagName.toLowerCase() === 'form') {
+        node = node.elements['title']
+      } else if (node.id) {
+        var form = document.getElementById('form-' + node.id)
+        if (form) {
+          node = form.elements['title']
+        }
+      }
+    }
+
+    node.focus()
+
+    if (typeof node.selectionStart === 'number') {
+      node.selectionStart = node.selectionEnd = node.value.length
+    } else if (typeof nodecreateTextRange !== 'undefined') {
+      node.focus()
+      var range = node.createTextRange()
+      range.collapse(false)
+      range.select()
+    }
+  }
+
   // add docs to DOM node list (either appending or starting with clean list node)
   var addToList = function (docs, reset) {
     var isItem = !!document.body.getAttribute('data-list-id')
@@ -39,7 +68,7 @@
 
       var listdiv = document.createElement(isItem ? 'li' : 'div')
       listdiv.id = doc._sanitizedid
-      listdiv.className = 'card ' + (isItem ? 'collection-item' : 'collapsible') + ' closed'
+      listdiv.className = 'card ' + (isItem ? 'collection-item' : 'collapsible')
       listdiv.innerHTML = template
 
       var existingdiv = document.getElementById(doc._sanitizedid)
@@ -54,8 +83,6 @@
       } else {
         updateItemCount(doc._id)
       }
-
-      shopper.toggle(listdiv)
     }
   }
 
@@ -118,7 +145,7 @@
 
   var shopper = {
     register: function (themodel) {
-      model = themodel(function (err, docs) {
+      model = shopper.model = themodel(function (err, docs) {
         if (err) {
           console.error(err)
         } else {
@@ -126,17 +153,56 @@
           addToList(docs)
         }
       })
-
-      shopper.model = model
     },
 
-    add: function () {
+    openadd: function () {
+      var form = null
       if (document.body.getAttribute('data-list-id')) {
-        document.querySelector('#shopping-list-item-add form').reset()
-        document.body.className += ' shopping-list-item-add'
+        form = document.getElementById('shopping-list-item-add')
       } else {
-        document.querySelector('#shopping-list-add form').reset()
-        document.body.className += ' shopping-list-add'
+        form = document.getElementById('shopping-list-add')
+      }
+
+      form.reset()
+      document.body.className += ' ' + form.id
+
+      formFocus(form)
+    },
+
+    closeadd: function () {
+      document.body.className = document.body.className.replace('shopping-list-item-add', '').replace('shopping-list-add', '')
+    },
+
+    add: function (event) {
+      var form = event.target
+      var elements = form.elements
+      var listid = document.body.getAttribute('data-list-id')
+      var doc = {}
+
+      if (!elements['title'].value) {
+        console.error('title required')
+      } else if (listid && form.id.indexOf('list-item') === -1) {
+        console.error('incorrect form')
+      } else if (!listid && form.id.indexOf('list-item') > -1) {
+        console.error('list id required')
+      } else {
+        for (var i = 0; i < elements.length; i++) {
+          doc[elements[i].name] = elements[i].value
+        }
+
+        if (listid) {
+          doc['list'] = listid
+        }
+
+        model.save(doc, function (err, updated) {
+          if (err) {
+            console.error(err)
+          } else {
+            doc._id = doc._id || updated._id || updated.id
+            addToList([doc])
+            shopper.closeadd()
+          }
+        })
       }
     },
 
@@ -150,68 +216,45 @@
       })
     },
 
-    save: function (id) {
+    update: function (id) {
       var elements = null
       var listid = document.body.getAttribute('data-list-id')
-      if (id === 'shopping-list-add' || id === 'shopping-list-item-add') {
-        var doc = {}
-        elements = document.querySelector('#' + id + ' form').elements
-        if (!elements['title'].value) {
-          console.error('title required')
-        } else {
-          for (var i = 0; i < elements.length; i++) {
-            doc[elements[i].name] = elements[i].value
-          }
-          doc['list'] = listid
-
-          model.save(doc, function (err, updated) {
-            if (err) {
-              console.error(err)
-            } else {
-              doc._id = doc._id || updated._id || updated.id
-              addToList([doc])
-              shopper.closemodal()
-            }
-          })
-        }
+      elements = document.getElementById('form-' + sanitize(id)).elements
+      var checked = document.getElementById('checked-item-' + sanitize(id))
+      if (!elements['title'].value) {
+        console.error('title required')
       } else {
-        elements = document.getElementById('form-' + sanitize(id)).elements
-        var checked = document.getElementById('checked-item-' + sanitize(id))
-        if (!elements['title'].value) {
-          console.error('title required')
-        } else {
-          model.get(id, function (err, doc) {
-            if (err) {
-              console.log(err)
-            } else {
-              doc.title = elements['title'].value
-              if (listid) {
-                doc.checked = checked ? !!checked.checked : false
-              }
-              model.save(doc, function (err, updated) {
-                if (err) {
-                  console.error(err)
-                } else {
-                  addToList([doc])
-                }
-              })
+        model.get(id, function (err, doc) {
+          if (err) {
+            console.log(err)
+          } else {
+            doc.title = elements['title'].value
+            if (listid) {
+              doc.checked = checked ? !!checked.checked : false
             }
-          })
-        }
+            model.save(doc, function (err, updated) {
+              if (err) {
+                console.error(err)
+              } else {
+                addToList([doc])
+              }
+            })
+          }
+        })
       }
     },
 
-    goto: function (id, title, event) {
+    goto: function (listid, title, event) {
       if (event) {
         event.stopPropagation()
       }
-      if (id) {
-        model.items(id, function (err, docs) {
+      if (listid) {
+        model.items(listid, function (err, docs) {
           if (err) {
             console.error(err)
           } else {
             document.getElementById('header-title').innerText = title
-            document.body.setAttribute('data-list-id', id)
+            document.body.setAttribute('data-list-id', listid)
             docs.sort(function (a, b) {
               return a.title < b.title
             })
@@ -219,8 +262,8 @@
           }
         })
       } else {
-        var listid = document.body.getAttribute('data-list-id')
-        updateItemCount(listid)
+        var listId = document.body.getAttribute('data-list-id')
+        updateItemCount(listId)
         document.body.removeAttribute('data-list-id')
         document.getElementById('header-title').innerText = 'Shopping List'
       }
@@ -230,30 +273,43 @@
       if (event) {
         event.stopPropagation()
       }
+      var domnode = null
+
       if (typeof node === 'string') {
         var nodes = document.querySelectorAll('#' + node + ' .collapsible')
+        domnode = document.getElementById(node)
         for (var i = 0; i < nodes.length; i++) {
           if (nodes[i].classList) {
             nodes[i].classList.toggle('closed')
           }
         }
+        var inputs = document.querySelectorAll('#' + node + ' .collapsible input[placeholder]')
+        for (var j = 0; j < inputs.length; j++) {
+          inputs[j].value = inputs[j].getAttribute('placeholder')
+        }
       } else {
         node.classList.toggle('closed')
+        domnode = node
       }
-    },
 
-    closemodal: function () {
-      document.body.className = document.body.className.replace('shopping-list-item-add', '').replace('shopping-list-add', '')
-    },
+      formFocus(domnode)
+    }
+  }
 
-    handlekey: function (event, triggerid) {
-      if (event) {
-        if (event.target.tagName.toLowerCase() === 'body' && (event.which === 37 || event.keyCode === 37 || event.which === 39 || event.keyCode === 39)) {
-          event.stopPropagation()
-          event.preventDefault()
+  document.onkeydown = function (event) {
+    if (event.target.tagName.toLowerCase() === 'body' && (event.which === 37 || event.keyCode === 37 || event.which === 39 || event.keyCode === 39)) {
+      event.stopPropagation()
+      event.preventDefault()
+    } else if (event.which === 27 || event.keyCode === 27) {
+      event.stopPropagation()
+      var action = event.target.getAttribute('data-escape')
+      if (action) {
+        if (shopper.hasOwnProperty(action)) {
+          shopper[action]()
+        } else {
+          shopper.toggle(action)
         }
       }
-      return false
     }
   }
 

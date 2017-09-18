@@ -70,7 +70,7 @@ main .card {
   padding: 0 5%;
   transition-property: transform;
   transition-duration: 0.5s;
-  width: 99vw;
+  width: calc(100vw - 5px);
 }
 
 #shopping-list-items {
@@ -116,7 +116,7 @@ main .card {
   text-decoration: line-through;
 }
 
-.collection-item input:checked ~ i.more {
+.collection-item input:checked ~ button {
   visibility: hidden;
 }
 
@@ -142,8 +142,8 @@ main .card {
 	transition-duration: 2s;
 }
 
-body.shopping-list-add #shopping-list-add.bottom-sheet,
-body.shopping-list-item-add #shopping-list-item-add.bottom-sheet {
+body.shopping-list-add .list-bottom-sheet,
+body.shopping-list-item-add .item-bottom-sheet {
   z-index: 1007;
   display: block;
   bottom: 0px;
@@ -163,7 +163,7 @@ body.shopping-list-item-add .modal-overlay {
 
 body[data-list-id] #shopping-lists,
 body[data-list-id] #shopping-list-items {
-  transform: translate(-99vw);
+  transform: translate(calc(5px - 100vw));
 }
 
 body[data-list-id] .more,
@@ -173,4 +173,8 @@ body[data-list-id] .less {
 
 [type="checkbox"]:disabled:not(:checked) + label::before {
   display: none;
+}
+
+.more-btn {
+  padding: 2px 15px;
 }
