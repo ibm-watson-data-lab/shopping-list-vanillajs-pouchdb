@@ -133,11 +133,6 @@ body[data-list-id] #shopping-list-items {
   transform: translate(calc(5px - 100vw));
 }
 
-body[data-list-id] .more,
-body[data-list-id] .less {
-  cursor: pointer;
-}
-
 [type="checkbox"]:disabled:not(:checked) + label::before {
   display: none;
 }
