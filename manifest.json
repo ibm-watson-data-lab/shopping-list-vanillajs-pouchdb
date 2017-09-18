@@ -1,7 +1,7 @@
 {  
   "short_name": "Shopper",
   "name": "Shopping List",
-  "start_url": "/index.html",
+  "start_url": "/shopping-list-vanillajs-pouchdb",
   "background_color": "#F5F5F5",
   "theme_color": "#448AFF",
   "display": "standalone",

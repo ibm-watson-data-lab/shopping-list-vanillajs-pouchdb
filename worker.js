@@ -3,14 +3,8 @@
 
 var cachename = 'shopping-list-vanillajs-pouchdb-0.0.2'
 var urlstocache = [
-  '/',
-  'index.html',
-  'fonts/materialicons/MaterialIcons-Regular.ttf',
-  'fonts/materialicons/MaterialIcons-Regular.woff',
-  'fonts/materialicons/MaterialIcons-Regular.woff2',
-  'fonts/materialicons/MaterialIcons-Regular.eot',
-  'css/materialize.min.css',
-  'css/shoppinglist.css',
+  '/shopping-list-vanillajs-pouchdb',
+  '/shopping-list-vanillajs-pouchdb/index.html',
   'favicons/android-chrome-192x192.png',
   'favicons/android-chrome-512x512.png',
   'favicons/apple-touch-icon.png',
@@ -19,9 +13,13 @@ var urlstocache = [
   'favicons/favicon.ico',
   'favicons/mstile-150x150.png',
   'favicons/safari-pinned-tab.svg',
-  'js/browser-cuid.min.js',
-  'js/pouchdb-6.3.4.min.js',
-  'js/pouchdb.find.js',
+  'https://fonts.googleapis.com/icon?family=Material+Icons',
+  'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700',
+  'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css',
+  'https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js',
+  'https://cdn.jsdelivr.net/npm/pouchdb@6.3.4/dist/pouchdb.min.js',
+  'https://cdn.jsdelivr.net/npm/pouchdb@6.3.4/dist/pouchdb.find.min.js',
+  'css/shoppinglist.css',
   'js/shoppinglist.js',
   'js/shoppinglist.model.js'
 ]
@@ -40,10 +38,15 @@ self.addEventListener('install', function (event) {
 // intercept page requests
 self.addEventListener('fetch', function (event) {
   console.log(event.request.url)
+  // respond with cached response. if not found, fetch then add to cache
   event.respondWith(
-    caches.match(event.request).then(function (response) {
-      // serve requests from cache (if found)
-      return response || fetch(event.request)
+    caches.open(cachename).then(function (cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function (response) {
+          cache.put(event.request, response.clone())
+          return response
+        })
+      })
     })
   )
 })
