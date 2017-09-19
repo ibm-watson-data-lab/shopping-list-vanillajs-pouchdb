@@ -50,6 +50,7 @@
 
   // PouchDB
   var db = null
+  var dbsync = null
 
   var model = function (dbname, callback) {
     var name = callback && dbname ? dbname : 'shopping'
@@ -69,12 +70,7 @@
     db.createIndex({
       index: { fields: ['type'] }
     }, function (err, response) {
-      if (err) {
-        handleResponse(err, response, cb, 'model.db.createIndex')
-      } else {
-        console.log('model.createIndex', response)
-        model.lists(cb)
-      }
+      handleResponse(err, response, cb, 'model.db.createIndex')
     })
 
     return model
@@ -92,6 +88,7 @@
     }
 
     if (doc) {
+      console.log('*** va *** model.save(db.put)', d)
       db.put(doc, function (err, response) {
         handleResponse(err, response, callback, 'model.save')
       })
@@ -125,6 +122,7 @@
               }
             })
           }
+          console.log('*** va *** model.remove(db.remove)', id)
           db.remove(id, doc._rev, function (err, response) {
             handleResponse(err, response, callback, 'model.remove')
           })
@@ -163,6 +161,60 @@
       var docs = response ? response.docs || response : response
       handleResponse(err, docs, callback, 'model.find')
     })
+  }
+
+  model.settings = function (settings, callback) {
+    var id = '_local/user'
+    var cb = callback || settings
+    if (callback && settings && typeof settings === 'object') {
+      db.get(id, function (err, doc) {
+        settings._id = id
+        if (err) {
+          console.error(err)
+        } else {
+          settings._rev = doc._rev
+        }
+        console.log('*** va *** model.settings(db.put)', settings)
+        db.put(settings, function (err, response) {
+          handleResponse(err, response, cb, 'model.settings.put')
+        })
+      })
+    } else {
+      db.get(id, function (err, doc) {
+        handleResponse(err, doc, cb, 'model.settings.get')
+      })
+    }
+  }
+
+  model.sync = function (remoteDB, oncomplete, onchange) {
+    if (dbsync) {
+      dbsync.cancel()
+    }
+
+    if (remoteDB) {
+      // do one-off sync from the server until completion
+      db.sync(remoteDB)
+        .on('complete', function (info) {
+          handleResponse(null, info, oncomplete, 'model.sync.complete')
+
+          // then two-way, continuous, retriable sync
+          dbsync = db.sync(remoteDB, { live: true, retry: true })
+            .on('change', function (info) {
+              // incoming changes only
+              if (info.direction === 'pull' && info.change && info.change.docs) {
+                handleResponse(null, info.change.docs, onchange, 'model.sync.change')
+              }
+            })
+            .on('error', function (err) {
+              handleResponse(err, null, onchange, 'model.sync.change.error')
+            })
+        })
+        .on('error', function (err) {
+          handleResponse(err, null, oncomplete, 'model.sync.error')
+        })
+    } else if (typeof oncomplete === 'function') {
+      oncomplete()
+    }
   }
 
   window.addEventListener('DOMContentLoaded', function () {

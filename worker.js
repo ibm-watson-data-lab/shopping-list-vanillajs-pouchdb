@@ -1,9 +1,10 @@
 /* global self, caches, fetch */
 'use strict'
 
-var cachename = 'shopping-list-vanillajs-pouchdb-0.0.3'
+var cachename = 'shopping-list-vanillajs-pouchdb-0.0.4'
 var urlstocache = [
   '/shopping-list-vanillajs-pouchdb',
+  '/shopping-list-vanillajs-pouchdb/',
   '/shopping-list-vanillajs-pouchdb/index.html',
   'favicons/android-chrome-192x192.png',
   'favicons/android-chrome-512x512.png',
@@ -37,13 +38,16 @@ self.addEventListener('install', function (event) {
 
 // intercept page requests
 self.addEventListener('fetch', function (event) {
-  console.log(event.request.url)
+  console.log('fetch', event.request.url)
   // respond with cached response. if not found, fetch then add to cache
   event.respondWith(
     caches.open(cachename).then(function (cache) {
       return cache.match(event.request).then(function (response) {
         return response || fetch(event.request).then(function (response) {
-          cache.put(event.request, response.clone())
+          if (event.request.url.indexOf('https://fonts.gstatic.com') === 0) {
+            // cache fonts
+            cache.put(event.request, response.clone())
+          }
           return response
         })
       })

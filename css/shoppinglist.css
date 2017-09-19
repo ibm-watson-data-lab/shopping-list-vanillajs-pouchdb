@@ -120,7 +120,8 @@ body.shopping-list-item-add .item-bottom-sheet {
 }
 
 body.shopping-list-add .modal-overlay,
-body.shopping-list-item-add .modal-overlay {
+body.shopping-list-item-add .modal-overlay,
+body.shopping-list-settings .modal-overlay {
   display: block;
   opacity: 0.5;
 	transition-property: all;
@@ -139,4 +140,36 @@ body[data-list-id] #shopping-list-items {
 
 .more-btn {
   padding: 2px 15px;
+}
+
+.modal.top-sheet {
+  bottom: auto;
+  top: -100%;
+  margin: 0;
+  width: 100%;
+  max-height: 45%;
+  border-radius: 0;
+  will-change: bottom, opacity;
+}
+
+body.shopping-list-settings .settings-top-sheet {
+  z-index: 1007;
+  display: block;
+  top: 0px;
+  opacity: 1;
+  transition-property: top;
+  transition-duration: .75s;
+}
+
+.settings {
+  margin-right: 25px;
+}
+
+#shopping-list-settings .input-field {
+  margin-top: 2.2rem;
+}
+
+#shopping-list-settings label {
+  font-size: 1.2rem;
+  top: -20px;
 }

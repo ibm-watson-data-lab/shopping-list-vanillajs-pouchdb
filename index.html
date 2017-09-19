@@ -40,6 +40,8 @@
             <a href="#" onclick="shopper.goto(); return false" class="goback"><i class="material-icons">arrow_back</i></a>
             <span id="header-title">Shopping Lists</span>
           </span>
+          <!-- settings button -->
+          <a href="#" onclick="shopper.opensettings(); return false" class="right settings"><i class="material-icons">settings</i></a>
         </div>
       </nav>
     </header>
@@ -92,6 +94,25 @@
         <div class="modal-footer">
           <button class="btn-flat blue-text accent-2-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
           <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="closeadd">Add</button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- modal: add a shopping list settings form -->
+    <div class="modal top-sheet settings-top-sheet">
+      <form id="shopping-list-settings" class="col s12 white" onsubmit="shopper.settings(event); return false">
+        <div class="modal-content">
+            <h5>Shopping Lists Settings</h5>
+              <div class="row">
+                <div class="input-field col s12">
+                  <span class="grey-text darken-4-text">Enter a fully qualified URL (including username and password) to a remote IBM Cloudant, Apache CouchDB, or PouchDB database to sync your shopping list.</span>
+                  <input name="remoteDB" type="url" class="validate" placeholder="http://username:password@localhost:5984/database" data-escape="closesettings" />
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-flat blue-text accent-2-text" type="button" data-escape="closesettings" onclick="shopper.closesettings()">Cancel</button>
+          <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="closesettings">Save &amp; Sync</button>
         </div>
       </form>
     </div>
