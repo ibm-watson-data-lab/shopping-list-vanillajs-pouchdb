@@ -34,7 +34,7 @@
 
     <!-- banner -->
     <header class="navbar-fixed">
-      <nav class="blue">
+      <nav id="nav" class="blue">
         <div class="nav-wrapper">
           <span class="brand-logo left">
             <a href="#" onclick="shopper.goto(); return false" class="goback"><i class="material-icons">arrow_back</i></a>
@@ -196,6 +196,18 @@
             console.log('ServiceWorker registration failed: ', err)
           })
         })
+
+        var onlineStatusUpdate = function () {
+          var nav = document.getElementById('nav')
+          if (navigator.onLine) {
+            nav.className = nav.className.replace('grey', '').trim()
+          } else {
+            nav.className += ' grey'
+          }
+        }
+
+        window.addEventListener('online',  onlineStatusUpdate)
+        window.addEventListener('offline',  onlineStatusUpdate)
       }
     </script>
 
