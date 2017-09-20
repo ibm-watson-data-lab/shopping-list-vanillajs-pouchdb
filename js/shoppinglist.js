@@ -136,7 +136,6 @@
             for (var i = 0; i < items.length; i++) {
               checked += items[i].checked ? 1 : 0
             }
-            // if (items[0]) {
             var node = document.getElementById('checked-list-' + sanitize(listid))
             if (node) {
               node.nextElementSibling.innerText = (checked + ' of ' + items.length + ' checked')
@@ -147,7 +146,6 @@
                 shopper.model.save(doc)
               }
             }
-            // }
           }
         })
       }
@@ -211,7 +209,7 @@
     },
 
     closeadd: function () {
-      document.body.className = document.body.className.replace('shopping-list-item-add', '').replace('shopping-list-add', '')
+      document.body.className = document.body.className.replace('shopping-list-item-add', '').replace('shopping-list-add', '').trim()
     },
 
     add: function (event) {
@@ -370,7 +368,7 @@
     },
 
     closesettings: function () {
-      document.body.className = document.body.className.replace('shopping-list-settings', '').replace('shopping-list-sync', '')
+      document.body.className = document.body.className.replace('shopping-list-settings', '').replace('shopping-list-sync', '').trim()
     },
 
     settings: function (event) {
@@ -398,12 +396,13 @@
     },
 
     sync: function (callback) {
-      var complete = function (err, response) {
-        document.body.className = document.body.className.replace('shopping-list-sync', '')
+      var complete = function (error, response) {
+        document.body.className = document.body.className.replace('shopping-list-sync', '').trim()
         document.body.removeAttribute('data-list-id')
 
-        if (err) {
-          console.error(err)
+        if (error) {
+          document.body.className += ' shopping-list-error-sync'
+          console.error(error)
         }
 
         shopper.model.lists(function (err, docs) {
@@ -412,18 +411,23 @@
           } else {
             addToList(docs, true)
           }
-          if (typeof callback === 'function') {
+          if (typeof callback === 'function' && !error) {
             callback()
           }
         })
       }
 
       if (shopper.settings.remoteDB) {
+        document.body.className = document.body.className.replace('shopping-list-error-sync', '').trim()
         document.body.className += ' shopping-list-sync'
         var change = function (err, docs) {
           if (err) {
+            document.body.className += ' shopping-list-error-sync'
             console.error(err)
           } else {
+            if (document.body.className.indexOf('shopping-list-error-sync') !== -1) {
+              document.body.className = document.body.className.replace('shopping-list-error-sync', '').trim()
+            }
             var updates = []
             for (var i = 0; i < docs.length; i++) {
               if (docs[i]._deleted) {

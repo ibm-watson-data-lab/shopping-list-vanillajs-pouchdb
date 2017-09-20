@@ -34,7 +34,7 @@
 
     <!-- banner -->
     <header class="navbar-fixed">
-      <nav class="blue accent-2">
+      <nav class="blue">
         <div class="nav-wrapper">
           <span class="brand-logo left">
             <a href="#" onclick="shopper.goto(); return false" class="goback"><i class="material-icons">arrow_back</i></a>
@@ -42,6 +42,7 @@
           </span>
           <!-- settings button -->
           <a href="#" onclick="shopper.opensettings(); return false" class="right settings"><i class="material-icons">settings</i></a>
+          <a href="#" onclick="shopper.opensettings(); return false" class="right settings red-text text-lighten-5"><i class="material-icons">error</i></a>
         </div>
       </nav>
     </header>
@@ -73,8 +74,8 @@
               </div>
         </div>
         <div class="modal-footer">
-          <button class="btn-flat blue-text accent-2-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
-          <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="closeadd">Add</button>
+          <button class="btn-flat blue-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
+          <button class="btn-flat blue-text" type="submit" data-escape="closeadd">Add</button>
         </div>
       </form>
     </div>
@@ -92,8 +93,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn-flat blue-text accent-2-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
-          <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="closeadd">Add</button>
+          <button class="btn-flat blue-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
+          <button class="btn-flat blue-text" type="submit" data-escape="closeadd">Add</button>
         </div>
       </form>
     </div>
@@ -107,12 +108,13 @@
                 <div class="input-field col s12">
                   <span class="grey-text darken-4-text">Enter a fully qualified URL (including username and password) to a remote IBM Cloudant, Apache CouchDB, or PouchDB database to sync your shopping list.</span>
                   <input name="remoteDB" type="url" class="validate" placeholder="http://username:password@localhost:5984/database" data-escape="closesettings" />
+                  <div class="chip"></div>
                 </div>
               </div>
         </div>
         <div class="modal-footer">
-          <button class="btn-flat blue-text accent-2-text" type="button" data-escape="closesettings" onclick="shopper.closesettings()">Cancel</button>
-          <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="closesettings">Save &amp; Sync</button>
+          <button class="btn-flat blue-text" type="button" data-escape="closesettings" onclick="shopper.closesettings()">Cancel</button>
+          <button class="btn-flat blue-text" type="submit" data-escape="closesettings">Sync</button>
         </div>
       </form>
     </div>
@@ -148,8 +150,8 @@
             </div>
           </div>
           <div class="card-action">
-            <button class="btn-flat blue-text accent-2-text" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
-            <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="{{_sanitizedid}}">Update</button>
+            <button class="btn-flat blue-text" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
+            <button class="btn-flat blue-text" type="submit" data-escape="{{_sanitizedid}}">Update</button>
           </div>
         </form>
       </div>
@@ -176,8 +178,8 @@
             </div>
           </div>
           <div class="card-action">
-            <button class="btn-flat blue-text accent-2-text" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
-            <button class="btn-flat blue-text accent-2-text" type="submit" data-escape="{{_sanitizedid}}">Update</button>
+            <button class="btn-flat blue-text" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
+            <button class="btn-flat blue-text" type="submit" data-escape="{{_sanitizedid}}">Update</button>
           </div>
         </form>
       </div>
@@ -187,12 +189,13 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
+          // register service worker
           navigator.serviceWorker.register('worker.js').then(function(registration) {
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            console.log('ServiceWorker registration successful with scope: ', registration.scope)
           }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
-          });
-        });
+            console.log('ServiceWorker registration failed: ', err)
+          })
+        })
       }
     </script>
 

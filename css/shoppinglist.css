@@ -11,6 +11,11 @@ body[data-list-id] .goback {
   visibility: initial;
 }
 
+body.shopping-list-offline nav,
+body.shopping-list-offline #add-button {
+  background-color: #607D8B !important;
+}
+
 nav .nav-wrapper {
   padding-left: 10px;
 }
@@ -23,8 +28,8 @@ main {
 
 main #add-button {
   position: fixed;
-  bottom: 45px;
-  right: 45px;
+  bottom: 25px;
+  right: 25px;
 }
 
 main .card {
@@ -147,7 +152,6 @@ body[data-list-id] #shopping-list-items {
   top: -100%;
   margin: 0;
   width: 100%;
-  max-height: 45%;
   border-radius: 0;
   will-change: bottom, opacity;
 }
@@ -172,4 +176,64 @@ body.shopping-list-settings .settings-top-sheet {
 #shopping-list-settings label {
   font-size: 1.2rem;
   top: -20px;
+}
+
+#shopping-list-settings .chip {
+  display: none;
+  font-weight: 300;
+}
+
+body.shopping-list-error-sync nav a.settings:first-of-type,
+body:not(.shopping-list-error-sync) nav a.settings:last-of-type  {
+  display: none;
+}
+
+body:not(.shopping-list-error-sync) nav a.settings:first-of-type,
+body.shopping-list-error-sync nav a.settings:last-of-type  {
+  display: initial;
+}
+
+.shopping-list-error-sync #shopping-list-settings .chip {
+  display: inline-block;
+  background-color: #F44336;
+  color: #FFFFFF;
+}
+
+.shopping-list-error-sync #shopping-list-settings .chip::after {
+  content: 'Sync Error';
+}
+
+.shopping-list-sync #shopping-list-settings .chip {
+  display: inline-block;
+  background-color: #2196F3;
+  color: #FFFFFF;
+}
+
+.shopping-list-sync #shopping-list-settings .chip::after {
+  content: 'Syncing';
+}
+
+.shopping-list-sync nav a.settings > i {
+  display: inline-block;
+  animation-name: spinanimation;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes spinanimation {
+  from { -webkit-transform: rotate(0deg) }
+  to { -webkit-transform: rotate(360deg) }
+}
+@-moz-keyframes spinanimation {
+  from { -moz-transform: rotate(0deg) }
+  to { -moz-transform: rotate(360deg) }
+}
+@-ms-keyframes spinanimation {
+  from { -ms-transform: rotate(0deg) }
+  to { -ms-transform:rotate(360deg) }
+}
+@keyframes spinanimation {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
 }

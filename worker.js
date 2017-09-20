@@ -1,7 +1,8 @@
 /* global self, caches, fetch */
 'use strict'
 
-var cachename = 'shopping-list-vanillajs-pouchdb-0.0.4'
+var CACHE_NAME = 'shopping-list-vanillajs-pouchdb-0.0.5'
+
 var urlstocache = [
   '/shopping-list-vanillajs-pouchdb',
   '/shopping-list-vanillajs-pouchdb/',
@@ -25,10 +26,22 @@ var urlstocache = [
   'js/shoppinglist.model.js'
 ]
 
+var fromnetwork = function (request, cache) {
+  return fetch(request).then(function (response) {
+    if (request.url.indexOf('https://fonts.gstatic.com') === 0) {
+      // cache fonts
+      if (response.status < 400) {
+        cache.put(request, response.clone())
+      }
+    }
+    return response
+  })
+}
+
 // install/cache page assets
 self.addEventListener('install', function (event) {
   event.waitUntil(
-    caches.open(cachename)
+    caches.open(CACHE_NAME)
       .then(function (cache) {
         console.log('cache opened')
         return cache.addAll(urlstocache)
@@ -39,19 +52,17 @@ self.addEventListener('install', function (event) {
 // intercept page requests
 self.addEventListener('fetch', function (event) {
   console.log('fetch', event.request.url)
-  // respond with cached response. if not found, fetch then add to cache
   event.respondWith(
-    caches.open(cachename).then(function (cache) {
-      return cache.match(event.request).then(function (response) {
-        return response || fetch(event.request).then(function (response) {
-          if (event.request.url.indexOf('https://fonts.gstatic.com') === 0) {
-            // cache fonts
-            cache.put(event.request, response.clone())
-          }
-          return response
-        })
+    caches
+      .open(CACHE_NAME)
+      .then(function (cache) {
+        // try from network first
+        return fromnetwork(event.request, cache)
+          .catch(function () {
+            // network failed retrieve from cache
+            return cache.match(event.request)
+          })
       })
-    })
   )
 })
 
@@ -63,7 +74,7 @@ self.addEventListener('activate', function (event) {
       return Promise.all(
         keys.filter(function (key) {
           // filter old versioned keys
-          return key !== cachename
+          return key !== CACHE_NAME
         }).map(function (key) {
           return caches.delete(key)
         })

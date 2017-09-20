@@ -88,7 +88,6 @@
     }
 
     if (doc) {
-      console.log('*** va *** model.save(db.put)', d)
       db.put(doc, function (err, response) {
         handleResponse(err, response, callback, 'model.save')
       })
@@ -122,7 +121,6 @@
               }
             })
           }
-          console.log('*** va *** model.remove(db.remove)', id)
           db.remove(id, doc._rev, function (err, response) {
             handleResponse(err, response, callback, 'model.remove')
           })
@@ -174,7 +172,6 @@
         } else {
           settings._rev = doc._rev
         }
-        console.log('*** va *** model.settings(db.put)', settings)
         db.put(settings, function (err, response) {
           handleResponse(err, response, cb, 'model.settings.put')
         })
