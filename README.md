@@ -2,13 +2,13 @@
 
 **Note:** This is a work in progress. 
 
-Shopping List is an Offline First demo Progressive Web App built using [PouchDB](https://pouchdb.com/) and no additional JavsScript framework. [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
+This Shopping List is an Offline First demo Progressive Web App built using [PouchDB](https://pouchdb.com/) and no additional JavaScript framework. [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
 
 ## Quick Start
 
-- Clone this GitHub [repo](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
-- Deploy the contents of the repo using your preferred HTTP server
-- Go to `index.html` in your browser
+1. Clone this GitHub [repo](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
+2. Deploy the contents of the repo using your preferred HTTP server
+3. Go to `index.html` in your browser
 
 ## Features
 
