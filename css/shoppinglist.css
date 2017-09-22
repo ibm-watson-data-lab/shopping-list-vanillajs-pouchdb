@@ -94,6 +94,10 @@ body.shopping-list-offline .primary-color,
 body.shopping-list-offline .secondary-color {
   background-color: #273A4E !important;
 }
+body.shopping-list-offline .primary-color *,
+body.shopping-list-offline .secondary-color * {
+  color: #E1E2E1 !important;
+}
 
 .item-edit form,
 .list-edit form {
