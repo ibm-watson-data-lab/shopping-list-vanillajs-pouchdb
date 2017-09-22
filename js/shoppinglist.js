@@ -138,7 +138,7 @@
             }
             var node = document.getElementById('checked-list-' + sanitize(listid))
             if (node) {
-              node.nextElementSibling.innerText = (checked + ' of ' + items.length + ' checked')
+              node.nextElementSibling.innerText = items.length ? (checked + ' of ' + items.length + ' items checked') : '0 items'
               node.checked = checked && checked === items.length
               if ((doc.checked && checked !== items.length) ||
                 (!doc.checked && checked === items.length)) {
@@ -185,10 +185,11 @@
               for (var setting in settings) {
                 shopper.settings[setting] = settings[setting]
               }
-              shopper.sync(function () {
-                console.log('shopper ready!')
-              })
             }
+
+            shopper.sync(function () {
+              console.log('shopper ready!')
+            })
           })
         }
       })
@@ -312,6 +313,8 @@
           } else {
             document.getElementById('header-title').innerText = title
             document.body.setAttribute('data-list-id', listid)
+            document.body.scrollTop = 0
+            document.documentElement.scrollTop = 0
             docs.sort(function (a, b) {
               return a.title < b.title
             })
@@ -368,7 +371,7 @@
     },
 
     closesettings: function () {
-      document.body.className = document.body.className.replace('shopping-list-settings', '').replace('shopping-list-sync', '').trim()
+      document.body.className = document.body.className.replace('shopping-list-settings', '').trim()
     },
 
     settings: function (event) {

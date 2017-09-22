@@ -7,10 +7,10 @@
     <meta name="keywords" content="Offline First,HTML,CSS,XML,JavaScript,PouchDB">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <meta name="theme-color" content="#448AFF">
+    <meta name="theme-color" content="#283b4f">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#448AFF">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#283b4f">
     <meta name="apple-mobile-web-app-title" content="Shopping List">
 
     <meta name="msapplication-config" content="browserconfig.xml">
@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#448AFF">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#283b4f">
     <link rel="shortcut icon" href="favicons/favicon.ico">
 
     <link rel="manifest" href="manifest.json">
@@ -27,14 +27,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link rel="stylesheet" href="css/shoppinglist.css">
-    
+
     <title>Shopping List | vanilla JavaScript | PouchDB</title>
   </head>
-  <body class="grey lighten-4">
-
+  <body>
     <!-- banner -->
     <header class="navbar-fixed">
-      <nav id="nav" class="blue">
+      <nav id="nav" class="primary-color">
         <div class="nav-wrapper">
           <span class="brand-logo left">
             <a href="#" onclick="shopper.goto(); return false" class="goback"><i class="material-icons">arrow_back</i></a>
@@ -42,7 +41,7 @@
           </span>
           <!-- settings button -->
           <a href="#" onclick="shopper.opensettings(); return false" class="right settings"><i class="material-icons">settings</i></a>
-          <a href="#" onclick="shopper.opensettings(); return false" class="right settings red-text text-lighten-5"><i class="material-icons">error</i></a>
+          <a href="#" onclick="shopper.opensettings(); return false" class="right settings"><i class="material-icons secondary-text lighter">error</i></a>
         </div>
       </nav>
     </header>
@@ -56,7 +55,7 @@
         <!-- shopping list items get inserted here -->
       </ul>
       <!-- add more stuff button -->
-      <button id="add-button" class="btn-floating btn-large red right" onclick="shopper.openadd()">
+      <button id="add-button" class="btn-floating btn-large secondary-color right" onclick="shopper.openadd()">
         <i class="material-icons">add</i>
       </button>
     </main>
@@ -73,9 +72,9 @@
                 <input name="type" type="hidden" value="list">
               </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn-flat blue-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
-          <button class="btn-flat blue-text" type="submit" data-escape="closeadd">Add</button>
+        <div class="modal-footer primary-color">
+          <button class="btn-flat" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
+          <button class="btn-flat" type="submit" data-escape="closeadd">Add</button>
         </div>
       </form>
     </div>
@@ -92,9 +91,9 @@
             <input name="type" type="hidden" value="item">
           </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn-flat blue-text" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
-          <button class="btn-flat blue-text" type="submit" data-escape="closeadd">Add</button>
+        <div class="modal-footer primary-color">
+          <button class="btn-flat" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
+          <button class="btn-flat" type="submit" data-escape="closeadd">Add</button>
         </div>
       </form>
     </div>
@@ -106,15 +105,15 @@
             <h5>Shopping Lists Settings</h5>
               <div class="row">
                 <div class="input-field col s12">
-                  <span class="grey-text darken-4-text">Enter a fully qualified URL (including username and password) to a remote IBM Cloudant, Apache CouchDB, or PouchDB database to sync your shopping list.</span>
+                  <span class="primary-text darker">Enter a fully qualified URL (including username and password) to a remote IBM Cloudant, Apache CouchDB, or PouchDB database to sync your shopping list.</span>
                   <input name="remoteDB" type="url" class="validate" placeholder="http://username:password@localhost:5984/database" data-escape="closesettings" />
                   <div class="chip"></div>
                 </div>
               </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn-flat blue-text" type="button" data-escape="closesettings" onclick="shopper.closesettings()">Cancel</button>
-          <button class="btn-flat blue-text" type="submit" data-escape="closesettings">Sync</button>
+        <div class="modal-footer secondary-color">
+          <button class="btn-flat" type="button" data-escape="closesettings" onclick="shopper.closesettings()">Cancel</button>
+          <button class="btn-flat" type="submit" data-escape="closesettings">Sync</button>
         </div>
       </form>
     </div>
@@ -127,9 +126,9 @@
       <div class="list-view collapsible">
         <div class="card-content" onclick="shopper.goto('{{_id}}', '{{title}}', event)">
           <span class="card-title activator">{{title}}
-            <button class="btn-flat more-btn right grey-text darken-3-text" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">more_vert</i></button>
+            <button class="btn-flat more-btn right" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">more_vert</i></button>
           </span>
-          <p class="grey-text text-lighten-1">{{place.title}}</p>
+          <p class="primary-text darker">{{place.title}}</p>
         </div>
         <div class="card-action">
           <input type="checkbox" id="checked-list-{{_sanitizedid}}" name="checked-list-{{_sanitizedid}}" {{_checked}} disabled />
@@ -140,7 +139,7 @@
         <form id="form-{{_sanitizedid}}" class="col s12 white" onsubmit="shopper.update('{{_id}}', event); return false">
           <div class="card-content">
             <span class="card-title">
-              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right grey-text darken-3-text" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">close</i></button>
+              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">close</i></button>
             </span>
             <h5>Edit Shopping List</h5>
             <div class="row">
@@ -150,8 +149,8 @@
             </div>
           </div>
           <div class="card-action">
-            <button class="btn-flat blue-text" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
-            <button class="btn-flat blue-text" type="submit" data-escape="{{_sanitizedid}}">Update</button>
+            <button class="btn-flat" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
+            <button class="btn-flat" type="submit" data-escape="{{_sanitizedid}}">Update</button>
           </div>
         </form>
       </div>
@@ -162,13 +161,13 @@
       <div class="item-view collapsible">
         <input type="checkbox" id="checked-item-{{_sanitizedid}}" name="checked-item-{{_sanitizedid}}" {{_checked}} onclick="shopper.update('{{_id}}')" value="{{title}}" />
         <label for="checked-item-{{_sanitizedid}}">{{title}}</label>
-        <button class="btn-flat more-btn right grey-text darken-3-text" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">more_vert</i></button>
+        <button class="btn-flat more-btn right" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">more_vert</i></button>
       </div>
       <div class="item-edit collapsible closed">
-        <form id="form-{{_sanitizedid}}" class="col s12 white" onsubmit="shopper.update('{{_id}}', event); return false">
+        <form id="form-{{_sanitizedid}}" class="col s12 tertiary lighter" onsubmit="shopper.update('{{_id}}', event); return false">
           <div>
             <span class="card-title">
-              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right grey-text darken-3-text" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">close</i></button>
+              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">close</i></button>
             </span>
             <h5>Edit Item</h5>
             <div class="row">
@@ -178,8 +177,8 @@
             </div>
           </div>
           <div class="card-action">
-            <button class="btn-flat blue-text" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
-            <button class="btn-flat blue-text" type="submit" data-escape="{{_sanitizedid}}">Update</button>
+            <button class="btn-flat" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
+            <button class="btn-flat" type="submit" data-escape="{{_sanitizedid}}">Update</button>
           </div>
         </form>
       </div>
@@ -196,18 +195,20 @@
             console.log('ServiceWorker registration failed: ', err)
           })
         })
+      }
 
+      if ('onLine' in navigator) {
         var onlineStatusUpdate = function () {
-          var nav = document.getElementById('nav')
           if (navigator.onLine) {
-            nav.className = nav.className.replace('grey', '').trim()
+            document.body.className = document.body.className.replace('shopping-list-offline', '').trim()
           } else {
-            nav.className += ' grey'
+            document.body.className += ' shopping-list-offline'
           }
         }
 
         window.addEventListener('online',  onlineStatusUpdate)
         window.addEventListener('offline',  onlineStatusUpdate)
+        onlineStatusUpdate()
       }
     </script>
 

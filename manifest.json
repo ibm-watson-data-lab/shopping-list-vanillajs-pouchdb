@@ -2,8 +2,8 @@
   "short_name": "Shopper",
   "name": "Shopping List",
   "start_url": "/shopping-list-vanillajs-pouchdb",
-  "background_color": "#F5F5F5",
-  "theme_color": "#448AFF",
+  "background_color": "#283b4f",
+  "theme_color": "#283b4f",
   "display": "standalone",
   "orientation": "portrait", 
   "icons": [
