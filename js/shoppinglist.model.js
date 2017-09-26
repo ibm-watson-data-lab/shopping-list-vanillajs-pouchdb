@@ -103,6 +103,12 @@
   }
 
   model.remove = function (id, callback) {
+    function _delete(rev) {
+      db.remove(id, rev, function (err, response) {
+        handleResponse(err, response, callback, 'model.remove')
+      })
+    }
+
     if (id) {
       db.get(id, function (err, doc) {
         if (err) {
@@ -112,18 +118,29 @@
             // remove all children
             model.items(doc._id, function (err, response) {
               if (err) {
-                handleResponse(err, doc, callback, 'model.remove.items')
+                console.error('model.remove.items', err)
+                _delete(doc._rev)
               } else {
-                var docs = response ? response.docs || response : response
-                for (var i in docs) {
-                  model.remove(docs[i]._id)
+                var items = response ? response.docs || response : response
+                if (items && items.length) {
+                  var markfordeletion = items.map(function (item) {
+                    item._deleted = true
+                    return item
+                  })
+                  db.bulkDocs(markfordeletion, function (err, response) {
+                    if (err) {
+                      console.error('model.remove.bulkDocs', err)
+                    }
+                    _delete(doc._rev)
+                  })
+                } else {
+                  _delete(doc._rev)
                 }
               }
             })
+          } else {
+            _delete(doc._rev)
           }
-          db.remove(id, doc._rev, function (err, response) {
-            handleResponse(err, response, callback, 'model.remove')
-          })
         }
       })
     } else {

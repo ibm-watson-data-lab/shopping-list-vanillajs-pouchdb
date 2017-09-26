@@ -64,13 +64,13 @@
     <div class="modal bottom-sheet list-bottom-sheet">
       <form id="shopping-list-add" class="col s12 white" onsubmit="shopper.add(event); return false">
         <div class="modal-content">
-            <h5>Create a Shopping List</h5>
-              <div class="row">
-                <div class="input-field col s12">
-                  <input name="title" type="text" class="validate" placeholder="Enter a title for the shopping list" data-escape="closeadd" required />
-                </div>
-                <input name="type" type="hidden" value="list">
-              </div>
+          <h5>Create a Shopping List</h5>
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="title" type="text" class="validate" placeholder="Enter a title for the shopping list" data-escape="closeadd" required />
+            </div>
+            <input name="type" type="hidden" value="list">
+          </div>
         </div>
         <div class="modal-footer primary-color">
           <button class="btn-flat" type="button" data-escape="closeadd" onclick="shopper.closeadd()">Cancel</button>
