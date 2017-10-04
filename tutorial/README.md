@@ -2,6 +2,18 @@
 
 This document describes how to build your own Offline First shopping list app with vanilla JavaScript and PouchDB in a step-by-step tutorial.
 
+## Table of Contents
+
+* [Prerequisite Knowledge & Skills](#prerequisite-knowledge--skills)
+* [Key Concepts](#key-concepts)
+* [Initial Set Up](#initial-set-up)
+* [Creating the Vanilla JS App](#creating-the-vanilla-javascript-app)
+* [PouchDB Database](#the-pouchdb-database)
+* [Making a PWA](#making-a-pwa)
+* [Syncing Data](#syncing-data)
+* [Summary](#summary)
+* [Resources](#resources)
+
 ## Prerequisite Knowledge & Skills
 
 A working knowledge of HTML, CSS, and JavaScript is required. This is not a tutorial to learn JavaScript, CSS, or HTML, therefore, some language specific concepts may be used but not discussed in detail.

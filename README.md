@@ -47,16 +47,6 @@ Shopping List is a simple demo app, with a limited feature set. Here is a list o
 
 To see this app in action without installing anything, simply visit https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb in a web browser or mobile device.
 
-## [Tutorial](tutorial)
+## Tutorial
 
-### Table of Contents
-
-* [Prerequisite Knowledge & Skills](tutorial#prerequisite-knowledge--skills)
-* [Key Concepts](tutorial#key-concepts)
-* [Initial Set Up](tutorial#initial-set-up)
-* [Creating the Vanilla JS App](tutorial#creating-the-vanilla-javascript-app)
-* [PouchDB Database](tutorial#the-pouchdb-database)
-* [Making a PWA](tutorial#making-a-pwa)
-* [Syncing Data](tutorial#syncing-data)
-* [Summary](tutorial#summary)
-* [Resources](tutorial#resources)
+Refer to the [tutorial](tutorial) for step-by-step instructions on how to build your own Offline First shopping list app with vanilla JavaScript and PouchDB.
