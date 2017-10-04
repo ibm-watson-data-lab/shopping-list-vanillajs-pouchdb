@@ -3,6 +3,10 @@
 (function () {
   'use strict'
 
+  // PouchDB
+  var db = null
+  var dbsync = null
+
   // Shopping List Schema
   // https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-example
   var initListDoc = function (doc) {
@@ -48,16 +52,8 @@
     }
   }
 
-  // PouchDB
-  var db = null
-  var dbsync = null
-
-  var model = function (dbname, callback) {
-    var name = callback && dbname ? dbname : 'shopping'
-    var cb = callback || dbname
-
-    db = new PouchDB(name || 'shopping')
-    model.db = db
+  var model = function (callback) {
+    db = new PouchDB('shopping')
 
     db.info(function (err, info) {
       if (err) {
@@ -70,10 +66,19 @@
     db.createIndex({
       index: { fields: ['type'] }
     }, function (err, response) {
-      handleResponse(err, response, cb, 'model.db.createIndex')
+      handleResponse(err, model, callback, 'model.db.createIndex')
     })
+  }
 
-    return model
+  model.lists = function (callback) {
+    db.find({
+      selector: {
+        type: 'list'
+      }
+    }, function (err, response) {
+      var docs = response ? response.docs || response : response
+      handleResponse(err, docs, callback, 'model.lists')
+    })
   }
 
   model.save = function (d, callback) {
@@ -103,7 +108,7 @@
   }
 
   model.remove = function (id, callback) {
-    function _delete(rev) {
+    function deleteRev (rev) {
       db.remove(id, rev, function (err, response) {
         handleResponse(err, response, callback, 'model.remove')
       })
@@ -113,50 +118,37 @@
       db.get(id, function (err, doc) {
         if (err) {
           handleResponse(err, doc, callback, 'model.remove.get')
-        } else {
-          if (doc.type === 'list') {
-            // remove all children
-            model.items(doc._id, function (err, response) {
-              if (err) {
-                console.error('model.remove.items', err)
-                _delete(doc._rev)
+        } else if (doc.type === 'list') {
+          // remove all children
+          model.items(doc._id, function (err, response) {
+            if (err) {
+              console.error('model.remove.items', err)
+              deleteRev(doc._rev)
+            } else {
+              var items = response ? response.docs || response : response
+              if (items && items.length) {
+                var markfordeletion = items.map(function (item) {
+                  item._deleted = true
+                  return item
+                })
+                db.bulkDocs(markfordeletion, function (err, response) {
+                  if (err) {
+                    console.error('model.remove.bulkDocs', err)
+                  }
+                  deleteRev(doc._rev)
+                })
               } else {
-                var items = response ? response.docs || response : response
-                if (items && items.length) {
-                  var markfordeletion = items.map(function (item) {
-                    item._deleted = true
-                    return item
-                  })
-                  db.bulkDocs(markfordeletion, function (err, response) {
-                    if (err) {
-                      console.error('model.remove.bulkDocs', err)
-                    }
-                    _delete(doc._rev)
-                  })
-                } else {
-                  _delete(doc._rev)
-                }
+                deleteRev(doc._rev)
               }
-            })
-          } else {
-            _delete(doc._rev)
-          }
+            }
+          })
+        } else {
+          deleteRev(doc._rev)
         }
       })
     } else {
       handleResponse(new Error('Missing id'), null, callback, 'model.remove')
     }
-  }
-
-  model.lists = function (callback) {
-    db.find({
-      selector: {
-        type: 'list'
-      }
-    }, function (err, response) {
-      var docs = response ? response.docs || response : response
-      handleResponse(err, docs, callback, 'model.lists')
-    })
   }
 
   model.items = function (listid, callback) {
@@ -168,13 +160,6 @@
     }, function (err, response) {
       var docs = response ? response.docs || response : response
       handleResponse(err, docs, callback, 'model.items')
-    })
-  }
-
-  model.find = function (selector, callback) {
-    db.find(selector, function (err, response) {
-      var docs = response ? response.docs || response : response
-      handleResponse(err, docs, callback, 'model.find')
     })
   }
 
@@ -232,6 +217,6 @@
   }
 
   window.addEventListener('DOMContentLoaded', function () {
-    window.shopper.register(model)
+    window.shopper(model)
   })
 }())

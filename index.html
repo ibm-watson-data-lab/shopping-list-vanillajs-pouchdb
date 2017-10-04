@@ -51,9 +51,11 @@
       <div id="shopping-lists">
         <!-- shopping lists get inserted here -->
       </div>
+      
       <ul id="shopping-list-items" class="collection">
         <!-- shopping list items get inserted here -->
       </ul>
+      
       <!-- add more stuff button -->
       <button id="add-button" class="btn-floating btn-large secondary-color right" onclick="shopper.openadd()">
         <i class="material-icons">add</i>
@@ -132,7 +134,7 @@
         </div>
         <div class="card-action">
           <input type="checkbox" id="checked-list-{{_sanitizedid}}" name="checked-list-{{_sanitizedid}}" {{_checked}} disabled />
-          <label for="checked-list-{{_sanitizedid}}">0 items in list</label>
+          <label for="checked-list-{{_sanitizedid}}">0 items</label>
         </div>
       </div>
       <div class="list-edit collapsible closed">
@@ -157,7 +159,7 @@
     </script>
 
     <!-- template: shopping list item -->
-    <script type="text/template" id="shopping-list-item">
+    <script type="text/template" id="shopping-list-item-template">
       <div class="item-view collapsible">
         <input type="checkbox" id="checked-item-{{_sanitizedid}}" name="checked-item-{{_sanitizedid}}" {{_checked}} onclick="shopper.update('{{_id}}')" value="{{title}}" />
         <label for="checked-item-{{_sanitizedid}}">{{title}}</label>
