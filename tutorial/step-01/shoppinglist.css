@@ -1,0 +1,43 @@
+body {
+  background-color: #E1E2E1;
+  box-shadow: none !important;
+  overflow-x: hidden;
+}
+
+body * {
+  box-shadow: none !important;
+}
+
+.primary-color {
+  background-color: #52647A !important;
+}
+
+.primary-color * {
+  color: #FFFFFF !important;
+}
+
+nav .nav-wrapper {
+  padding-left: 10px;
+}
+
+main {
+  display: flex;
+  margin: 0 auto 75px auto;
+  width: 200vw;
+}
+
+#shopping-lists,
+#shopping-list-items  {
+  display: inline-block;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  transition-property: transform;
+  transition-duration: 0.5s;
+}
+
+#shopping-list-items {
+  background-color: #FFFFFF;
+  border: 0 none;
+  vertical-align: top;
+}

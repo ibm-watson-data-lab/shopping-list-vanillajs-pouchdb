@@ -1,0 +1,259 @@
+body {
+  background-color: #E1E2E1;
+  box-shadow: none !important;
+  overflow-x: hidden;
+}
+
+body * {
+  box-shadow: none !important;
+}
+
+.primary-color {
+  background-color: #52647A !important;
+}
+
+.primary-color * {
+  color: #FFFFFF !important;
+}
+
+nav .nav-wrapper {
+  padding-left: 10px;
+}
+
+main {
+  display: flex;
+  margin: 0 auto 75px auto;
+  width: 200vw;
+}
+
+#shopping-lists,
+#shopping-list-items  {
+  display: inline-block;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  transition-property: transform;
+  transition-duration: 0.5s;
+}
+
+#shopping-list-items {
+  background-color: #FFFFFF;
+  border: 0 none;
+  vertical-align: top;
+}
+
+main #add-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}
+
+main .card {
+  margin: 30px;
+}
+
+.secondary-color {
+  background-color: #FF6CA1 !important;
+}
+
+.secondary-color * {
+  color: #000000 !important;
+}
+
+h5 {
+  font-weight: 300;
+}
+
+.btn-flat {
+  color: #7f91A9;
+}
+
+.btn-flat:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+input:focus:not([disabled]):not([readonly]) {
+  border-bottom-color: #52647A !important;
+}
+
+body.shopping-list-add .list-bottom-sheet,
+body.shopping-list-item-add .item-bottom-sheet {
+  z-index: 1007;
+  display: block;
+  bottom: 0px;
+  opacity: 1;
+	transition-property: bottom;
+	transition-duration: .75s;
+}
+
+body.shopping-list-add .modal-overlay,
+body.shopping-list-item-add .modal-overlay,
+body.shopping-list-settings .modal-overlay {
+  display: block;
+  opacity: 0.5;
+	transition-property: all;
+	transition-duration: 0.25s;
+  z-index: 1006; 
+}
+
+.collapsible {
+  overflow-y: hidden;
+  margin: 0;
+	max-height: calc(100vh - 65px);
+	transition-property: all;
+	transition-duration: .55s;
+}
+
+.collapsible.closed {
+	max-height: 0;
+	transition-property: all;
+	transition-duration: .15s;
+}
+
+.card.collapsible {
+	transition-duration: 2s;
+}
+
+.list-edit .card-action,
+.item-edit .card-action {
+  border: 0 none;
+  padding: 0;
+  text-align: right;
+}
+
+.item-edit form,
+.list-edit form {
+  margin: 15px;
+}
+
+#shopping-list-items .card,
+#shopping-list-items .card .collapsible {
+  border: 0 none;
+  box-shadow: initial;
+}
+
+#shopping-list-items .collection-item {
+  border-bottom: 1px solid #DDDDDD;
+  padding: 30px;
+  margin: 0 35px;
+}
+
+#shopping-list-items .card label {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: initial;
+}
+
+.collection-item input:checked ~ label {
+  text-decoration: line-through;
+}
+
+.collection-item input:checked ~ button {
+  visibility: hidden;
+}
+
+.collection-item input:not(:checked) ~ label {
+  color: #212121;
+}
+
+body[data-list-id] {
+  background-color: #FFFFFF !important;
+}
+
+body[data-list-id] #shopping-lists,
+body[data-list-id] #shopping-list-items {
+  transform: translate(-100vw);
+}
+
+.goback {
+  visibility: hidden;
+}
+
+body[data-list-id] .goback {
+  visibility: initial;
+}
+
+[type="checkbox"]:disabled:not(:checked) + label::before {
+  display: none;
+}
+
+.modal.top-sheet {
+  bottom: auto;
+  top: -100%;
+  margin: 0;
+  width: 100%;
+  border-radius: 0;
+  will-change: bottom, opacity;
+}
+
+body.shopping-list-settings .settings-top-sheet {
+  z-index: 1007;
+  display: block;
+  top: 0px;
+  opacity: 1;
+  transition-property: top;
+  transition-duration: .75s;
+}
+
+.settings {
+  margin-right: 25px;
+}
+
+#shopping-list-settings .input-field {
+  margin-top: 2.2rem;
+}
+
+#shopping-list-settings label {
+  font-size: 1.2rem;
+  top: -20px;
+}
+
+#shopping-list-settings .chip {
+  display: none;
+  font-weight: 300;
+}
+
+.shopping-list-error-sync #shopping-list-settings .chip {
+  display: inline-block;
+  background-color: #C83873;
+  color: #FFFFFF;
+}
+
+.shopping-list-error-sync #shopping-list-settings .chip::after {
+  content: 'Sync Error';
+}
+
+.shopping-list-sync #shopping-list-settings .chip {
+  display: inline-block;
+  background-color: #273A4E;
+  color: #FFFFFF;
+}
+
+.shopping-list-sync #shopping-list-settings .chip::after {
+  content: 'Syncing';
+}
+
+.shopping-list-sync nav a.settings > i {
+  display: inline-block;
+  animation-name: spinanimation;
+  animation-duration: 0.7s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes spinanimation {
+  from { -webkit-transform: rotate(0deg) }
+  to { -webkit-transform: rotate(360deg) }
+}
+@-moz-keyframes spinanimation {
+  from { -moz-transform: rotate(0deg) }
+  to { -moz-transform: rotate(360deg) }
+}
+@-ms-keyframes spinanimation {
+  from { -ms-transform: rotate(0deg) }
+  to { -ms-transform:rotate(360deg) }
+}
+@keyframes spinanimation {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
+}

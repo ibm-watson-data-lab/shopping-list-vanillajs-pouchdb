@@ -1,0 +1,94 @@
+body {
+  background-color: #E1E2E1;
+  box-shadow: none !important;
+  overflow-x: hidden;
+}
+
+body * {
+  box-shadow: none !important;
+}
+
+.primary-color {
+  background-color: #52647A !important;
+}
+
+.primary-color * {
+  color: #FFFFFF !important;
+}
+
+nav .nav-wrapper {
+  padding-left: 10px;
+}
+
+main {
+  display: flex;
+  margin: 0 auto 75px auto;
+  width: 200vw;
+}
+
+#shopping-lists,
+#shopping-list-items  {
+  display: inline-block;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  transition-property: transform;
+  transition-duration: 0.5s;
+}
+
+#shopping-list-items {
+  background-color: #FFFFFF;
+  border: 0 none;
+  vertical-align: top;
+}
+
+main #add-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}
+
+main .card {
+  margin: 30px;
+}
+
+.secondary-color {
+  background-color: #FF6CA1 !important;
+}
+
+.secondary-color * {
+  color: #000000 !important;
+}
+
+h5 {
+  font-weight: 300;
+}
+
+.btn-flat {
+  color: #7f91A9;
+}
+
+.btn-flat:hover {
+  background-color: rgba(0,0,0,0.1);
+}
+
+input:focus:not([disabled]):not([readonly]) {
+  border-bottom-color: #52647A !important;
+}
+
+body.shopping-list-add .list-bottom-sheet {
+  z-index: 1007;
+  display: block;
+  bottom: 0px;
+  opacity: 1;
+	transition-property: bottom;
+	transition-duration: .75s;
+}
+
+body.shopping-list-add .modal-overlay {
+  display: block;
+  opacity: 0.5;
+	transition-property: all;
+	transition-duration: 0.25s;
+  z-index: 1006; 
+}
