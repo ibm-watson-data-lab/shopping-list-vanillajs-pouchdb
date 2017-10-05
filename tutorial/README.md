@@ -34,6 +34,8 @@ At the end of the tutorial you will have created a [Progressive Web App](https:/
 
 Much of the shopping list app's styling will be provided via [Materialize CSS](http://materializecss.com/getting-started.html), but an additional CSS file (`shoppinglist.css`) will be used for tweaking and replacing some of the styles. Materialize's accompanying JavaScript file will not be used. However, two separate JavaScript files- `shoppinglist.model.js` (to handle the storing, updating, etc of data) and `shoppinglist.js` (to control the app and define some of the logic) will be used, along with the [PouchDB](https://pouchdb.com/download.html) JavaScript library.
 
+> **Note**: When viewing the code snippets, some previously entered content may be intentionally omitted and replaced with `...` for readability. Refer to the referenced file in the corresponding tutorial step to see the full content.
+
 1. Create a new directory for your app
 1. Create the [`index.html`](step-01/index.html) and add the initial HTML markup for your app. In the HTML, include the required JavaScript, CSS, fonts, and icons, along with the page's metadata. The HTML body contains the app's banner and a content area which is divided into two regions (i.e., shopping lists and shopping list items):
 
@@ -197,8 +199,6 @@ Much of the shopping list app's styling will be provided via [Materialize CSS](h
 ### Creating a Shopping List
 
 The first thing you want to be able to do with a shopping list app is to create new shopping lists. To achieve this, you should have an add button which launches a form to fill out with the shopping list title and then submit the form to actually create the list.
-
-> **Note**: When viewing the code snippets, some previously entered content may be intentionally omitted and replaced with `...` for readability. Refer to the referenced file in appropriate tutorial step to see the full content.
 
 1. Update [`index.html`](step-02/index.html) to have an **Add** button, the **Create a Shopping List** form, and the template to represent a single shopping list. In addition, the `PouchDB` `find` plugin is also needed for improved searching of the database:
 
@@ -1020,7 +1020,7 @@ A shopping list is not complete without the means to add items to the list. Next
 	}())
 	```
 
-1. Update the [`shoppinglist.model.js`](step-04/shoppinglist.model.js) functions to properly handle the saving, retrieving, and updating of shopping list items. The schema being used for the shopping list item is defined in the [shopping-list-example](https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-example) documentation::
+1. Update the [`shoppinglist.model.js`](step-04/shoppinglist.model.js) functions to properly handle the saving, retrieving, and updating of shopping list items. The schema being used for the shopping list item is defined in the [shopping-list-example](https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-example) documentation:
 	
 	```js
 	(function () {
