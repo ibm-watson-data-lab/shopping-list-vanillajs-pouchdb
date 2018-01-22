@@ -12,3 +12,4 @@ applications:
   host: shopping-list-vanillajs-pouchdb-${random-word}
   services:
   - sljsp-cloudantNoSQLDB
+  
