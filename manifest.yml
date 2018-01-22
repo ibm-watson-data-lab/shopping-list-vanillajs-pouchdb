@@ -8,5 +8,6 @@ applications:
   memory: 256M
   instances: 1
   disk_quota: 1024M
+  host: shopping-list-vanillajs-pouchdb-${random-word}
   services:
   - sljsp-cloudantNoSQLDB
