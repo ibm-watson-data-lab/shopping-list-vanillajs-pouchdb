@@ -132,10 +132,17 @@ To disable tracking, simply remove ``require('metrics-tracker-client').track();`
 <!--Include any relevant links-->
 
 # Links
-* [Demo on Youtube](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
-* [Watson Node.js SDK](https://github.com/watson-developer-cloud/node-sdk)
-* [Relevancy Training Demo Video](https://www.youtube.com/watch?v=8BiuQKPQZJk)
-* [Relevancy Training Demo Notebook](https://github.com/akmnua/relevancy_passage_bww)
+* [Tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial)
+* [More Shopping List Sample Apps](https://github.com/ibm-watson-data-lab/shopping-list)
+* [Offline First](http://offlinefirst.org/)
+* [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/)
+* [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+* [Web App Manifest](https://w3c.github.io/manifest/)
+* [PouchDB](https://pouchdb.com/)
+* [Apache CouchDB](https://couchdb.apache.org/)
+* [IBM Cloudant](https://cloudant.com/)
+* [Vanilla JS](http://vanilla-js.com/)  😂 &nbsp; (aka plain old [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
+* [Materialize CSS](http://materializecss.com/getting-started.html)
 
 <!-- pick the relevant ones from below -->
 # Learn more
