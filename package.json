@@ -1,0 +1,27 @@
+{
+  "name": "shopping-list-vanillajs-pouchdb",
+  "version": "1.0.0",
+  "description": "Offline First shopping list app written with plain JavaScript and PouchDB",
+  "scripts": {
+    "test": "standard js/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb.git"
+  },
+  "keywords": [
+    "OffineFirst",
+    "JavaScript",
+    "PouchDB",
+    "CouchDB"
+  ],
+  "author": "vabarbosa",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/issues"
+  },
+  "homepage": "https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb#readme",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
