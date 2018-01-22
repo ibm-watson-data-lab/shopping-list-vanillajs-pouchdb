@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Offline First shopping list app written with plain JavaScript and PouchDB",
   "scripts": {
-    "test": "standard js/*.js"
+    "test": "standard js/*.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
   "homepage": "https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb#readme",
   "devDependencies": {
     "standard": "^10.0.3"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
   }
 }
