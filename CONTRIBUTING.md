@@ -47,8 +47,8 @@ and test environment, or use "Deploy to Bluemix" and you can use the Bluemix Dev
 
 ## Testing
 
-This project does not, at present, have any automated tests. If you'd like to contribute some then please raise and issue and submit a pull-request - we'd be very happy to add them! Any pull-request you contribute will run through our continuous integration process which may check your code style and may in future ensure that an automated test suite passes.
+Follow the "Run the test" guide in the `README`.
 
 ## Coding Style Guidelines
 
-This repository's JavaScript code is built to the [JavaScript Standard Style](https://standardjs.com/). Our continuous integration will check your code against these standards when you push to GitHub. To test your code on your machine, simply run `npm test`.
+Follow the "Coding style" guide in the `README`.
