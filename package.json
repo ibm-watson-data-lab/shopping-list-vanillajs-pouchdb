@@ -2,9 +2,11 @@
   "name": "shopping-list-vanillajs-pouchdb",
   "version": "1.0.0",
   "description": "Offline First shopping list app written with plain JavaScript and PouchDB",
+  "main": "app.js",
   "scripts": {
-    "test": "standard js/*.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "standard js/*.js"
+
   },
   "repository": {
     "type": "git",
