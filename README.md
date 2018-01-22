@@ -129,6 +129,11 @@ Refer to https://github.com/IBM/metrics-collector-service#privacy-notice.
 
 To disable tracking, simply remove ``require('metrics-tracker-client').track();`` from the ``app.js`` file in the top level directory.
 
+
+# Tutorial
+
+Refer to the [tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial) for step-by-step instructions on how to build your own Offline First shopping list Progressive Web App with Vanilla JS (aka plain old JavaScript) and PouchDB.
+
 <!--Include any relevant links-->
 
 # Links
