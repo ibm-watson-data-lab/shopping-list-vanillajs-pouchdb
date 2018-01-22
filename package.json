@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Offline First shopping list app written with plain JavaScript and PouchDB",
   "scripts": {
-    "test": "standard js/*.js && mocha"
+    "test": "standard js/*.js && karma start --single-run --browsers ChromeHeadless karma.conf.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,11 @@
   },
   "homepage": "https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb#readme",
   "devDependencies": {
+    "chai": "^4.1.2",
+    "karma": "^2.0.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-mocha": "^1.3.0",
     "mocha": "^5.0.0",
     "standard": "^10.0.3"
   }
