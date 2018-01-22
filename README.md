@@ -12,7 +12,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Flow
 
-1. Browser loads the Progressive Web App's resources from the web server
+1. Browser loads Progressive Web App's resources from the web server
 2. User interacts with the web app to add shopping lists and list items
 3. Data is stored locally in PouchDB
 4. PouchDB syncs its data with a remote IBM Cloudant database
@@ -23,8 +23,8 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 ## Featured technologies
 
-* [PouchDB](https://pouchdb.com/): an in-browser database that can replicate to and from a remote Apache CouchDB&trade; or IBM Cloudant database.
-* [JavaScript](https://developer.mozilla.org/bm/docs/Web/JavaScript): this demo uses no frameworks, just plain vanilla JavaScript.
+* [PouchDB](https://pouchdb.com/) - an in-browser database that can replicate to and from a remote Apache CouchDB or IBM Cloudant database.
+* [JavaScript](https://developer.mozilla.org/bm/docs/Web/JavaScript) - this demo uses no frameworks, just plain vanilla JavaScript.
 * [Databases](https://en.wikipedia.org/wiki/IBM_Information_Management_System#.22Full_Function.22_databases): Repository for storing and managing collections of data.
 
 # Steps
@@ -48,15 +48,14 @@ $ git clone https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouch
 
 ### 2. Run the Server
 
-Assuming you have pre-installed [Python](https://www.python.org/), run a simple web server:
+Assuming you have pre-installed [Python](https://www.python.org/), simple run a simple web server:
 
     cd shopping-list-vanillajs-pouchdb
-    python -m SimpleHTTPServer 8000 (Python 2.x)
-    python -m http.server 8000 (Python 3.x)
+    python -m SimpleHTTPServer 8000
 
 ### 3. Create a Cloudant or CouchDB service
 
-The app works fine with no back-end database service. In this mode it will store shopping lists in your web browser only. If you want to persist the data to a database, PouchDB can synchronize with CouchDB and compatible servers. To run and test locally, you can install CouchDB. Alternatively, you can use a hosted Cloudant NoSQL DB service as your remote database.
+PouchDB can synchronize with CouchDB and compatible servers. To run and test locally, you can install CouchDB. Alternatively, you can use a hosted Cloudant NoSQL DB service for your remote DB.
 
 #### Installing Apache CouchDB
 
@@ -68,7 +67,7 @@ Configure CouchDB for a [single-node setup](http://docs.couchdb.org/en/2.1.0/ins
 
 Sign up for an [IBM Cloud](https://console.ng.bluemix.net/) account, if you do not already have one.
 
-Once you are logged into IBM Cloud, create a new Cloudant instance on the [Cloudant NoSQL DB Bluemix Catalog](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db) page. This should take you to a page representing the newly-created service instance. Click the "Service credentials" link. You should have one set of service credentials listed. Click "View credentials" which should show you a JSON object containing your service credentials. Copy the value for the `url` key to your clipboard (the value will be in the form of `https://username:password@uniqueid-bluemix.cloudant.com`).
+Once you are logged in to IBM Cloud, create a new Cloudant instance on the [Cloudant NoSQL DB Bluemix Catalog](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db) page. This should take you to a page representing the newly-created service instance. Click the "Service credentials" link. You should have one set of service credentials listed. Click "View credentials" which should show you a JSON object containing your service credentials. Copy the value for the `url` key to your clipboard (the value will be in the form of `https://username:password@uniqueid-bluemix.cloudant.com`).
 
 ## Database and replication setup
 1. [Create the remote database](#1-create-the-remote-database)
@@ -78,7 +77,8 @@ Once you are logged into IBM Cloud, create a new Cloudant instance on the [Cloud
 ### 1. Create the remote database
 
 Use your Cloudant or CouchDB dashboard to create a database. Select the Databases icon on the left and then use the `Create Database` button to create the "shopping-list" database.
-The Shopping List app can be used locally before the database exists, but it cannot sync until the remote database is completed.
+The Shopping List app can be used locally before the database exists, but cannot sync
+until the remote database is completed.
 
 ![](doc/source/images/create_db.png)
 
@@ -129,6 +129,11 @@ Refer to https://github.com/IBM/metrics-collector-service#privacy-notice.
 
 To disable tracking, simply remove ``require('metrics-tracker-client').track();`` from the ``app.js`` file in the top level directory.
 
+
+# Tutorial
+
+Refer to the [tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial) for step-by-step instructions on how to build your own Offline First shopping list Progressive Web App with Vanilla JS (aka plain old JavaScript) and PouchDB.
+
 <!--Include any relevant links-->
 
 # Links
@@ -143,18 +148,6 @@ To disable tracking, simply remove ``require('metrics-tracker-client').track();`
 * [IBM Cloudant](https://cloudant.com/)
 * [Vanilla JS](http://vanilla-js.com/)  😂 &nbsp; (aka plain old [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
 * [Materialize CSS](http://materializecss.com/getting-started.html)
-
-<!-- pick the relevant ones from below -->
-# Learn more
-
-* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
-* **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other [Data Analytics Code Patterns](https://developer.ibm.com/code/technologies/data-science/)
-* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
-* **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.
-* **Data Science Experience**: Master the art of data science with IBM's [Data Science Experience](https://datascience.ibm.com/)
-* **PowerAI**: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: [IBM Power Systems](https://www.ibm.com/ms-en/marketplace/deep-learning-platform)
-* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our [Spark service](https://console.bluemix.net/catalog/services/apache-spark)
-* **Kubernetes on IBM Cloud**: Deliver your apps with the combined the power of [Kubernetes and Docker on IBM Cloud](https://www.ibm.com/cloud-computing/bluemix/containers)
 
 <!--keep this-->
 
