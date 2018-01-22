@@ -1,52 +1,149 @@
-# Shopping List - with Vanilla JavaScript and PouchDB 
+# Create an Offline First Shopping List with vanilla JavaScript and PouchDB 
 
-<strong style="color:red">Note</strong>: This is a work in progress. 
+In this code pattern, we will create an Offline First shopping list. Shopping List is an Offline First demo Progressive Web App built using vanilla JavaScript and [PouchDB](https://pouchdb.com/). [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
 
-This Shopping List is an Offline First demo Progressive Web App built using [PouchDB](https://pouchdb.com/) and no additional JavaScript framework. [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
+When the reader has completed this Code Pattern, they will understand how to:
 
-## Quick Start
+- create a shopping list web application that stores its data in a local PouchDB database.
+- turn the web application into a Progressive Web App that works with or without an internet connection.
+- make the app sync to and from a remote Cloudant database.
 
-1. Clone this GitHub [repo](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
-2. Deploy the contents of the repo using your preferred HTTP server
-3. Go to `index.html` in your browser
+![architecture](doc/source/images/architecture.png)
 
-## Features
+## Flow
 
-Shopping List is a simple demo app, with a limited feature set. Here is a list of features written as user stories grouped by Epic:
+1. Browser loads Progressive Web App's resources from the web server
+2. User interacts with the web app to add shopping lists and list items
+3. Data is stored locally in PouchDB
+4. PouchDB syncs its data with a remote IBM Cloudant database
 
-* Planning
-  * As a \<person planning to shop for groceries\>, I want to \<create a shopping list\> so that \<I can add items to this shopping list\>.
-  * As a \<person planning to shop for groceries\>, I want to \<add an item to my shopping list\> so that \<I can remember to buy that item when I am at the grocery store later\>.
-  * As a \<person planning to shop for groceries\>, I want to \<remove an item from my shopping list\> so that \<I can change my mind on what to buy when I am at the grocery store later\>.
-* Shopping
-  * As a \<person shopping for groceries\>, I want to \<view items on my shopping list\> so that \<I can remember what items to buy\>.
-  * As a \<person shopping for groceries\>, I want to \<add an item to my shopping list\> so that \<I can remember to buy that item\>.
-  * As a \<person shopping for groceries\>, I want to \<remove an item from my shopping list\> so that \<I can change my mind on what to buy\>.
-  * As a \<person shopping for groceries\>, I want to \<check off an item on my shopping list\> so that \<I can keep track of what items I have bought\>.
-* Offline First
-  * As a \<person shopping for groceries\>, I want to \<have the app installed on my device\> so that \<I can continue to utilize my shopping list when no internet connection is available\>.
-  * As a \<person shopping for groceries\>, I want to \<have my shopping list stored locally on my device\> so that \<I can continue to utilize my shopping list when no internet connection is available\>.
-  * As a \<person shopping for groceries\>, I want to \<sync my shopping list with the cloud\> so that \<I can manage and utilize my shopping list on multiple devices\>.
-* Multi-User / Multi-Device
-  * As a \<new user\>, I want to \<sign up for the app\> so that \<I can use the app\>.
-  * As an \<existing user\>, I want to \<sign in to the app\> so that \<I can use the app\>.
-  * As an \<existing user\>, I want to \<sign out of the app\> so that \<I can protect my privacy\>.
-* Geolocation
-  * As a \<person planning to shop for groceries\>, I want to \<associate a shopping list with a grocery store\> so that \<I can be notified of this shopping list when I am physically at that grocery store\>.
-  * As a \<person associating a shopping list with a physical store\>, I want to \<access previously-used locations\> so that \<I can quickly find the physical store for which I am searching\>.
-  * As a \<person shopping for groceries\>, I want to \<be notified of a shopping list when I am physically at the grocery store associated with that shopping list\> so that \<I can quickly find the shopping list for my current context\>.
+## Included components
 
-## App Architecture
+* [Cloudant NoSQL DB](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db): A fully managed data layer designed for modern web and mobile applications that leverages a flexible JSON schema.
 
-- Vanilla JavaScript
-- http://materializecss.com/ - Materialize CSS
-- https://pouchdb.com/ - PouchDB library
-- https://usecuid.org/ - Collision-resistant ids
+## Featured technologies
 
-## Live Demo
+* [PouchDB](https://pouchdb.com/) - an in-browser database that can replicate to and from a remote Apache CouchDB or IBM Cloudant database.
+* [JavaScript](https://developer.mozilla.org/bm/docs/Web/JavaScript) - this demo uses no frameworks, just plain vanilla JavaScript.
+* [Databases](https://en.wikipedia.org/wiki/IBM_Information_Management_System#.22Full_Function.22_databases): Repository for storing and managing collections of data.
 
-To see this app in action without installing anything, simply visit https://ibm-watson-data-lab.github.io/shopping-list-vanillajs-pouchdb in a web browser or mobile device.
+# Steps
 
-## Tutorial
+* [Run locally](#run-locally)
+* [Database and replication setup](#database-and-replication-setup)
 
-Refer to the [tutorial](tutorial) for step-by-step instructions on how to build your own Offline First shopping list app with vanilla JavaScript and PouchDB.
+## Run locally
+
+1. [Clone the repo](#1-clone-the-repo)
+1. [Run the server](#2-run-the-server)
+1. [Create a Cloudant or CouchDB service](#3-create-a-cloudant-or-couchdb-service)
+
+### 1. Clone the repo
+
+Clone the `shopping-list-vanillajs-pouchdb` locally. In a terminal, run:
+
+```
+$ git clone https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb
+```
+
+### 2. Run the Server
+
+Assuming you have pre-installed [Python](https://www.python.org/), simple run a simple web server:
+
+    cd shopping-list-vanillajs-pouchdb
+    python -m SimpleHTTPServer 8000
+
+### 3. Create a Cloudant or CouchDB service
+
+PouchDB can synchronize with CouchDB and compatible servers. To run and test locally, you can install CouchDB. Alternatively, you can use a hosted Cloudant NoSQL DB service for your remote DB.
+
+#### Installing Apache CouchDB
+
+[Install CouchDB 2.1](http://docs.couchdb.org/en/2.1.0/install/index.html). Instructions are available for installing CouchDB 2.1 on Unix-like systems, on Windows, on Mac OS X, on FreeBSD, and via other methods.
+
+Configure CouchDB for a [single-node setup](http://docs.couchdb.org/en/2.1.0/install/setup.html#single-node-setup), as opposed to a cluster setup. Once you have finished setting up CouchDB, you should be able to access CouchDB at `http://127.0.0.1:5984/`. Ensure that CouchDB is running and take note of your admin username and password.
+
+#### Creating a Cloudant NoSQL DB service
+
+Sign up for an [IBM Cloud](https://console.ng.bluemix.net/) account, if you do not already have one.
+
+Once you are logged in to IBM Cloud, create a new Cloudant instance on the [Cloudant NoSQL DB Bluemix Catalog](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db) page. This should take you to a page representing the newly-created service instance. Click the "Service credentials" link. You should have one set of service credentials listed. Click "View credentials" which should show you a JSON object containing your service credentials. Copy the value for the `url` key to your clipboard (the value will be in the form of `https://username:password@uniqueid-bluemix.cloudant.com`).
+
+## Database and replication setup
+1. [Create the remote database](#1-create-the-remote-database)
+1. [Enable CORS](#2-enable-cors)
+1. [Set the replication target](#3-set-the-replication-target)
+
+### 1. Create the remote database
+
+Use your Cloudant or CouchDB dashboard to create a database. Select the Databases icon on the left and then use the `Create Database` button to create the "shopping-list" database.
+The Shopping List app can be used locally before the database exists, but cannot sync
+until the remote database is completed.
+
+![](doc/source/images/create_db.png)
+
+### 2. Enable CORS
+
+Cross-Origin Resource Sharing (CORS) needs to be enabled. Use your Cloudant or CouchDB dashboard to enable it. The CORS options are under the account settings or config depending on your version. Enable CORS and restrict the domain as needed for security.
+
+![](doc/source/images/enable_cors.png)
+
+### 3. Set the replication target
+
+Run the Shopping List app and use the *Settings* form to enter your Database URL.
+If you use the Bluemix Cloudant URL taken from the service credentials as described above, the URL includes user and password GUIDs.
+
+Add `/shopping-list` to the URL to connect to the database that you created.
+
+![](doc/source/images/replicator.png)
+
+# Using the app
+
+The app allows you to create a shopping list by clicking on the plus sign. Click on the list to see its items. Then, you can add items to the list by clicking the plus sign. There is a checkbox to allow you to mark the items complete as you buy load up your cart.
+
+When you have not configured your Replication Target or when you are offline, the lists will not sync. One good way to test this is to run two browsers. You can use Chrome and Firefox and have different lists in each.
+
+When you go online and have the database and CORS enabled and the Replication Target is set, the shopping lists will sync. You will then be able to use both lists from either browser.
+
+![](doc/source/images/shopping_lists1.png)
+
+![](doc/source/images/shopping_lists2.png)
+
+## Running the app
+
+## Running the tests
+
+## Deploying to GitHub Pages
+
+# Privacy Notice
+
+Refer to https://github.com/IBM/metrics-collector-service#privacy-notice.
+
+## Disabling Deployment Tracking
+
+To disable tracking, simply remove ``require('metrics-tracker-client').track();`` from the ``app.js`` file in the top level directory.
+
+<!--Include any relevant links-->
+
+# Links
+* [Demo on Youtube](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
+* [Watson Node.js SDK](https://github.com/watson-developer-cloud/node-sdk)
+* [Relevancy Training Demo Video](https://www.youtube.com/watch?v=8BiuQKPQZJk)
+* [Relevancy Training Demo Notebook](https://github.com/akmnua/relevancy_passage_bww)
+
+<!-- pick the relevant ones from below -->
+# Learn more
+
+* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
+* **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other [Data Analytics Code Patterns](https://developer.ibm.com/code/technologies/data-science/)
+* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
+* **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.
+* **Data Science Experience**: Master the art of data science with IBM's [Data Science Experience](https://datascience.ibm.com/)
+* **PowerAI**: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: [IBM Power Systems](https://www.ibm.com/ms-en/marketplace/deep-learning-platform)
+* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our [Spark service](https://console.bluemix.net/catalog/services/apache-spark)
+* **Kubernetes on IBM Cloud**: Deliver your apps with the combined the power of [Kubernetes and Docker on IBM Cloud](https://www.ibm.com/cloud-computing/bluemix/containers)
+
+<!--keep this-->
+
+# License
+[Apache 2.0](LICENSE)
