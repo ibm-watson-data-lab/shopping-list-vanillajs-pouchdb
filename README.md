@@ -1,3 +1,7 @@
+<!-- badges -->
+[![Build Status](https://travis-ci.org/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb.svg?branch=master)](https://travis-ci.org/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
+![IBM Cloud Deployments](https://metrics-tracker.mybluemix.net/stats/a5cfd5b55da07a4ac1eb9590fbcc4bd3/badge.svg)
+
 # Create an Offline First Shopping List with vanilla JavaScript and PouchDB 
 
 In this code pattern, we will create an Offline First shopping list. Shopping List is an Offline First demo Progressive Web App built using vanilla JavaScript and [PouchDB](https://pouchdb.com/). [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
@@ -33,7 +37,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 * [Database and replication setup](#database-and-replication-setup)
 
 ## Deploy to IBM Cloud
-[![Deploy to IBM Cloud](https://metrics-tracker.mybluemix.net/stats/5c5df69e10058d49cdc1f4d2fc63ce31/button.svg)](https://bluemix.net/deploy?repository=https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
+[![Deploy to IBM Cloud](https://metrics-tracker.mybluemix.net/stats/a5cfd5b55da07a4ac1eb9590fbcc4bd3/button.svg)](https://bluemix.net/deploy?repository=https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
 
 1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
 
