@@ -65,10 +65,16 @@ Configure CouchDB for a [single-node setup](http://docs.couchdb.org/en/2.1.0/ins
 
 #### Creating a Cloudant NoSQL DB service
 
-Sign up for an [IBM Cloud](https://console.ng.bluemix.net/) account, if you do not already have one.
+* Log in to [IBM Cloud](https://console.ng.bluemix.net/).
+ > Sign up for an account, if you do not already have one.
+* [Provision a Cloudant NoSQL DB _Lite_ plan instance](https://console.bluemix.net/catalog/services/cloudant-nosql-db), which is free.
+  > If desired, you can also re-use an existing Cloudant NoSQL DB service instance. (Open the [**Data & Analytics**  resources dashboard](https://console.bluemix.net/dashboard/data) to see a list of pre-provisioned instances that you have access to.) 
+ * Open the **Service credentials** tab.
+* Add new credentials for this service instance if no credentials have been defined yet.
+* View the credentials and note the value of the **url** property, which has the following format: `https://username:password@username-bluemix.cloudant.com`.
 
-Once you are logged in to IBM Cloud, create a new Cloudant instance on the [Cloudant NoSQL DB Bluemix Catalog](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db) page. This should take you to a page representing the newly-created service instance. Click the "Service credentials" link. You should have one set of service credentials listed. Click "View credentials" which should show you a JSON object containing your service credentials. Copy the value for the `url` key to your clipboard (the value will be in the form of `https://username:password@uniqueid-bluemix.cloudant.com`).
-
+> Tip: Select the **Manage** tab and click **Launch** to open the Cloudant dashboard.
+ 
 ## Database and replication setup
 1. [Create the remote database](#1-create-the-remote-database)
 1. [Enable CORS](#2-enable-cors)
@@ -76,7 +82,9 @@ Once you are logged in to IBM Cloud, create a new Cloudant instance on the [Clou
 
 ### 1. Create the remote database
 
-Use your Cloudant or CouchDB dashboard to create a database. Select the Databases icon on the left and then use the `Create Database` button to create the "shopping-list" database.
+* Use the Cloudant or CouchDB dashboard to create a database.
+
+* Select the Databases tab on the left and then use the `Create Database` button to create the "shopping-list" database.
 The Shopping List app can be used locally before the database exists, but cannot sync
 until the remote database is completed.
 
@@ -84,14 +92,18 @@ until the remote database is completed.
 
 ### 2. Enable CORS
 
-Cross-Origin Resource Sharing (CORS) needs to be enabled. Use your Cloudant or CouchDB dashboard to enable it. The CORS options are under the account settings or config depending on your version. Enable CORS and restrict the domain as needed for security.
+* Open the Cloudant or CouchDB dashboard to enable Cross-Origin Resource Sharing (CORS).  
+
+* Select the Account Settings (or config) tab and open the **CORS** tab.
+
+* Enable CORS and restrict the domain as needed for security.
 
 ![](doc/source/images/enable_cors.png)
 
 ### 3. Set the replication target
 
-Run the Shopping List app and use the *Settings* form to enter your Database URL.
-If you use the Bluemix Cloudant URL taken from the service credentials as described above, the URL includes user and password GUIDs.
+Run the Shopping List app and use the *Settings* form to enter your database URL.
+If you use the IBM Cloud Cloudant URL taken from the service credentials as described above, the URL includes user and password GUIDs.
 
 Add `/shopping-list` to the URL to connect to the database that you created.
 
