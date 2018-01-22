@@ -29,8 +29,18 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 # Steps
 
-* [Run locally](#run-locally)
+* [Deploy to IBM Cloud](#deploy-to-ibm-cloud) **OR** [Run locally](#run-locally)
 * [Database and replication setup](#database-and-replication-setup)
+
+## Deploy to IBM Cloud
+[![Deploy to IBM Cloud](https://metrics-tracker.mybluemix.net/stats/5c5df69e10058d49cdc1f4d2fc63ce31/button.svg)](https://bluemix.net/deploy?repository=https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
+
+1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
+
+1. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking `View app`.
+
+1. To see the app and services created and configured for this code pattern, use the IBM Cloud dashboard. The app is named `shopping-list-vanillajs-pouchdb` with a unique suffix. The following services are created and easily identified by the `sljsp-` prefix:
+    * sljsp-CloudantNoSQLDB
 
 ## Run locally
 
@@ -48,10 +58,11 @@ $ git clone https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouch
 
 ### 2. Run the Server
 
-Assuming you have pre-installed [Python](https://www.python.org/), simple run a simple web server:
+Assuming you have pre-installed [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/getting-started/installing-node), run the following commands:
 
     cd shopping-list-vanillajs-pouchdb
-    python -m SimpleHTTPServer 8000
+    npm install
+    npm start
 
 ### 3. Create a Cloudant or CouchDB service
 

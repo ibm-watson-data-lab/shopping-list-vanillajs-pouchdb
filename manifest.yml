@@ -1,0 +1,15 @@
+---
+declared-services:
+  sljsp-cloudantNoSQLDB:
+    label: cloudantNoSQLDB
+    plan: Lite
+applications:
+- name: shopping-list-vanillajs-pouchdb
+  buildpack: sdk-for-nodejs
+  memory: 256M
+  instances: 1
+  disk_quota: 1024M
+  host: shopping-list-vanillajs-pouchdb-${random-word}
+  services:
+  - sljsp-cloudantNoSQLDB
+  
