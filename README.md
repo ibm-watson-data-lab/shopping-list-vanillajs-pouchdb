@@ -52,7 +52,6 @@ Assuming you have pre-installed [Python](https://www.python.org/), run a simple 
 
     cd shopping-list-vanillajs-pouchdb
     python -m SimpleHTTPServer 8000 (Python 2.x)
-    python -m http.server 8000 (Python 3.x)
 
 ### 3. Create a Cloudant or CouchDB service
 
