@@ -127,6 +127,7 @@ To disable tracking, simply remove ``require('metrics-tracker-client').track();`
 
 # Links
 * [Tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial)
+* [More Shopping List Sample Apps](https://github.com/ibm-watson-data-lab/shopping-list)
 * [Offline First](http://offlinefirst.org/)
 * [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/)
 * [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
