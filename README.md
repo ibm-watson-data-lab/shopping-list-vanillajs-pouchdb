@@ -145,7 +145,7 @@ Refer to the [tutorial](https://github.com/ibm-watson-data-lab/shopping-list-van
 * [Web App Manifest](https://w3c.github.io/manifest/)
 * [PouchDB](https://pouchdb.com/)
 * [Apache CouchDB](https://couchdb.apache.org/)
-* [IBM Cloudant](https://cloudant.com/)
+* [IBM Cloudant](https://www.ibm.com/cloud/cloudant)
 * [Vanilla JS](http://vanilla-js.com/)  😂 &nbsp; (aka plain old [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
 * [Materialize CSS](http://materializecss.com/getting-started.html)
 
