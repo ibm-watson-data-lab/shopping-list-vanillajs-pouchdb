@@ -10,8 +10,7 @@
     "url": "git+https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb.git"
   },
   "keywords": [
-    "Offine",
-    "First",
+    "OffineFirst",
     "JavaScript",
     "PouchDB",
     "CouchDB"

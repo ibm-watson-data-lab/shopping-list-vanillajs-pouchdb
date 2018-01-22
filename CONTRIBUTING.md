@@ -45,10 +45,3 @@ For more details, see the [MAINTAINERS](MAINTAINERS.md) page.
 Follow the "Run locally" steps in the `README` and you will have a local git repo 
 and test environment, or use "Deploy to Bluemix" and you can use the Bluemix DevOps environment.
 
-## Testing
-
-Follow the "Run the test" guide in the `README`.
-
-## Coding Style Guidelines
-
-Follow the "Coding style" guide in the `README`.
