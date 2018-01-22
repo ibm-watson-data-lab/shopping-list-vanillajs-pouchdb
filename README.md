@@ -144,11 +144,6 @@ To disable tracking, simply remove ``require('metrics-tracker-client').track();`
 * [Vanilla JS](http://vanilla-js.com/)  😂 &nbsp; (aka plain old [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
 * [Materialize CSS](http://materializecss.com/getting-started.html)
 
-# Learn more
-
-* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
-* **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution
-
 <!--keep this-->
 
 # License
