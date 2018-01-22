@@ -65,15 +65,17 @@ Configure CouchDB for a [single-node setup](http://docs.couchdb.org/en/2.1.0/ins
 
 #### Creating a Cloudant NoSQL DB service
 
+To provision a managed Cloudant NoSQL DB
+
 * Log in to [IBM Cloud](https://console.ng.bluemix.net/).
- > Sign up for an account, if you do not already have one.
+   > Sign up for an account, if you do not already have one.
 * [Provision a Cloudant NoSQL DB _Lite_ plan instance](https://console.bluemix.net/catalog/services/cloudant-nosql-db), which is free.
   > If desired, you can also re-use an existing Cloudant NoSQL DB service instance. (Open the [**Data & Analytics**  resources dashboard](https://console.bluemix.net/dashboard/data) to see a list of pre-provisioned instances that you have access to.) 
  * Open the **Service credentials** tab.
 * Add new credentials for this service instance if no credentials have been defined yet.
 * View the credentials and note the value of the **url** property, which has the following format: `https://username:password@username-bluemix.cloudant.com`.
 
-> Tip: Select the **Manage** tab and click **Launch** to open the Cloudant dashboard.
+Tip: Select the **Manage** tab and click **Launch** to open the Cloudant dashboard and manage the service instance.
  
 ## Database and replication setup
 1. [Create the remote database](#1-create-the-remote-database)
@@ -103,7 +105,7 @@ until the remote database is completed.
 ### 3. Set the replication target
 
 Run the Shopping List app and use the *Settings* form to enter your database URL.
-If you use the IBM Cloud Cloudant URL taken from the service credentials as described above, the URL includes user and password GUIDs.
+If you use the IBM Cloud Cloudant URL taken from the service credentials as described above, the URL includes user name and password.
 
 Add `/shopping-list` to the URL to connect to the database that you created.
 
