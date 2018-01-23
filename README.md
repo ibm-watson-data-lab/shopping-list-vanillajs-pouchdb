@@ -64,9 +64,9 @@ $ git clone https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouch
 
 Assuming you have pre-installed [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/getting-started/installing-node), run the following commands:
 
-    cd shopping-list-vanillajs-pouchdb
-    npm install
-    npm start
+    $ cd shopping-list-vanillajs-pouchdb
+    $ npm install
+    $ npm start
 
 ### 3. Create a Cloudant or CouchDB service
 
