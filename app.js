@@ -42,4 +42,4 @@ app.listen(port, () => {
   console.log(`Server starting on ${port}`)
 })
 
-require("metrics-tracker-client").track()
+require('metrics-tracker-client').track()
