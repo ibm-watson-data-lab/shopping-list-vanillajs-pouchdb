@@ -36,12 +36,12 @@
       <nav id="nav" class="primary-color">
         <div class="nav-wrapper">
           <span class="brand-logo left">
-            <a href="#" onclick="shopper.goto(); return false" class="goback"><i class="material-icons">arrow_back</i></a>
+            <a href="#" onclick="shopper.goto(); return false" class="goback" role="button"><i class="material-icons">arrow_back</i></a>
             <span id="header-title">Shopping Lists</span>
           </span>
           <!-- settings button -->
-          <a href="#" onclick="shopper.opensettings(); return false" class="right settings"><i class="material-icons">settings</i></a>
-          <a href="#" onclick="shopper.opensettings(); return false" class="right settings"><i class="material-icons secondary-text lighter">error</i></a>
+          <a href="#" onclick="shopper.opensettings(); return false" class="right settings" role="button"><i class="material-icons">settings</i></a>
+          <a href="#" onclick="shopper.opensettings(); return false" class="right settings" role="button"><i class="material-icons secondary-text lighter">error</i></a>
         </div>
       </nav>
     </header>
@@ -63,10 +63,10 @@
     </main>
 
     <!-- modal: add a shopping list form -->
-    <div class="modal bottom-sheet list-bottom-sheet">
+    <div class="modal bottom-sheet list-bottom-sheet" role="dialog" aria-labelledby="create-shopping-list">
       <form id="shopping-list-add" class="col s12 white" onsubmit="shopper.add(event); return false">
         <div class="modal-content">
-          <h5>Create a Shopping List</h5>
+          <h5 id="create-shopping-list">Create a Shopping List</h5>
           <div class="row">
             <div class="input-field col s12">
               <input name="title" type="text" class="validate" placeholder="Enter a title for the shopping list" data-escape="closeadd" required />
@@ -82,10 +82,10 @@
     </div>
     
     <!-- modal: add a shopping list item form -->
-    <div class="modal bottom-sheet item-bottom-sheet">
+    <div class="modal bottom-sheet item-bottom-sheet" role="dialog" aria-labelledby="add-an-item">
       <form id="shopping-list-item-add" class="col s12 white" onsubmit="shopper.add(event); return false">
         <div class="modal-content">
-          <h5>Add an Item</h5>
+          <h5 id="add-an-item">Add an Item</h5>
           <div class="row">
             <div class="input-field col s12">
               <input name="title" type="text" class="validate" placeholder="Enter an item to add to the shopping list" data-escape="closeadd" required />
@@ -101,10 +101,10 @@
     </div>
     
     <!-- modal: add a shopping list settings form -->
-    <div class="modal top-sheet settings-top-sheet">
+    <div class="modal top-sheet settings-top-sheet" role="dialog" aria-labelledby="shopping-lists-settings">
       <form id="shopping-list-settings" class="col s12 white" onsubmit="shopper.settings(event); return false">
         <div class="modal-content">
-            <h5>Shopping Lists Settings</h5>
+            <h5 id="shopping-lists-settings">Shopping Lists Settings</h5>
               <div class="row">
                 <div class="input-field col s12">
                   <span class="primary-text darker">Enter a fully qualified URL (including username and password) to a remote IBM Cloudant, Apache CouchDB, or PouchDB database to sync your shopping list.</span>
@@ -121,12 +121,12 @@
     </div>
 
     <!-- modal: overlay -->
-    <div class="modal-overlay" onclick="shopper.closeadd()"></div>
+    <div class="modal-overlay" onclick="shopper.closeadd()" aria-hidden="true"></div>
 
     <!-- template: shopping list -->
     <script type="text/template" id="shopping-list-template">
       <div class="list-view collapsible">
-        <div class="card-content" onclick="shopper.goto('{{_id}}', '{{title}}', event)">
+        <div class="card-content" onclick="shopper.goto('{{_id}}', '{{title}}', event)" role="button">
           <span class="card-title activator">{{title}}
             <button class="btn-flat more-btn right" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">more_vert</i></button>
           </span>
@@ -141,18 +141,18 @@
         <form id="form-{{_sanitizedid}}" class="col s12 white" onsubmit="shopper.update('{{_id}}', event); return false">
           <div class="card-content">
             <span class="card-title">
-              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">close</i></button>
+              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)" aria-hidden="true"><i class="material-icons">close</i></button>
             </span>
             <h5>Edit Shopping List</h5>
             <div class="row">
               <div class="input-field col s12">
-                <input name="title" type="text" class="validate" value="{{title}}" placeholder="{{title}}" data-escape="{{_sanitizedid}}" required />
+                <input name="title" type="text" class="validate" value="{{title}}" placeholder="{{title}}" data-escape="{{_sanitizedid}}" aria-hidden="true" required />
               </div>
             </div>
           </div>
           <div class="card-action">
-            <button class="btn-flat" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
-            <button class="btn-flat" type="submit" data-escape="{{_sanitizedid}}">Update</button>
+            <button class="btn-flat" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')" aria-hidden="true">Remove</button>
+            <button class="btn-flat" type="submit" data-escape="{{_sanitizedid}}" aria-hidden="true">Update</button>
           </div>
         </form>
       </div>
@@ -169,18 +169,18 @@
         <form id="form-{{_sanitizedid}}" class="col s12 tertiary lighter" onsubmit="shopper.update('{{_id}}', event); return false">
           <div>
             <span class="card-title">
-              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)"><i class="material-icons">close</i></button>
+              <button id="close-{{_sanitizedid}}" type="button" class="btn-flat more-btn right" data-escape="{{_sanitizedid}}" onclick="shopper.toggle('{{_sanitizedid}}', event)" aria-hidden="true"><i class="material-icons">close</i></button>
             </span>
             <h5>Edit Item</h5>
             <div class="row">
               <div class="input-field col s12">
-                <input name="title" type="text" class="validate" value="{{title}}" placeholder="{{title}}" data-escape="{{_sanitizedid}}" required />
+                <input name="title" type="text" class="validate" value="{{title}}" placeholder="{{title}}" data-escape="{{_sanitizedid}}" aria-hidden="true" required />
               </div>
             </div>
           </div>
           <div class="card-action">
-            <button class="btn-flat" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')">Remove</button>
-            <button class="btn-flat" type="submit" data-escape="{{_sanitizedid}}">Update</button>
+            <button class="btn-flat" type="button" data-escape="{{_sanitizedid}}" onclick="shopper.remove('{{_id}}')" aria-hidden="true">Remove</button>
+            <button class="btn-flat" type="submit" data-escape="{{_sanitizedid}}" aria-hidden="true">Update</button>
           </div>
         </form>
       </div>
