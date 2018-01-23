@@ -29,7 +29,7 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 * [PouchDB](https://pouchdb.com/) - an in-browser database that can replicate to and from a remote Apache CouchDB or IBM Cloudant database.
 * [JavaScript](https://developer.mozilla.org/bm/docs/Web/JavaScript) - this demo uses no frameworks, just plain vanilla JavaScript.
-* [Databases](https://en.wikipedia.org/wiki/IBM_Information_Management_System#.22Full_Function.22_databases): Repository for storing and managing collections of data.
+* [Apache CouchDB](http://couchdb.apache.org/) - modern, document database hosted on your server or in the cloud.
 
 # Steps
 
