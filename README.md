@@ -1,3 +1,7 @@
+<!-- badges -->
+[![Build Status](https://travis-ci.org/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb.svg?branch=master)](https://travis-ci.org/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
+![IBM Cloud Deployments](https://metrics-tracker.mybluemix.net/stats/a5cfd5b55da07a4ac1eb9590fbcc4bd3/badge.svg)
+
 # Create an Offline First Shopping List with vanilla JavaScript and PouchDB 
 
 In this code pattern, we will create an Offline First shopping list. Shopping List is an Offline First demo Progressive Web App built using vanilla JavaScript and [PouchDB](https://pouchdb.com/). [This app is part of a series of Offline First demo apps, each built using a different stack.](https://github.com/ibm-watson-data-lab/shopping-list) 
@@ -29,8 +33,18 @@ When the reader has completed this Code Pattern, they will understand how to:
 
 # Steps
 
-* [Run locally](#run-locally)
+* [Deploy to IBM Cloud](#deploy-to-ibm-cloud) **OR** [Run locally](#run-locally)
 * [Database and replication setup](#database-and-replication-setup)
+
+## Deploy to IBM Cloud
+[![Deploy to IBM Cloud](https://metrics-tracker.mybluemix.net/stats/a5cfd5b55da07a4ac1eb9590fbcc4bd3/button.svg)](https://bluemix.net/deploy?repository=https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb)
+
+1. Press the above ``Deploy to IBM Cloud`` button and then click on ``Deploy``.
+
+1. In Toolchains, click on Delivery Pipeline to watch while the app is deployed. Once deployed, the app can be viewed by clicking `View app`.
+
+1. To see the app and services created and configured for this code pattern, use the IBM Cloud dashboard. The app is named `shopping-list-vanillajs-pouchdb` with a unique suffix. The following services are created and easily identified by the `sljsp-` prefix:
+    * sljsp-CloudantNoSQLDB
 
 ## Run locally
 
@@ -48,10 +62,11 @@ $ git clone https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouch
 
 ### 2. Run the Server
 
-Assuming you have pre-installed [Python](https://www.python.org/), simple run a simple web server:
+Assuming you have pre-installed [Node.js](https://nodejs.org/en/download/) and [npm](https://docs.npmjs.com/getting-started/installing-node), run the following commands:
 
-    cd shopping-list-vanillajs-pouchdb
-    python -m SimpleHTTPServer 8000
+    $ cd shopping-list-vanillajs-pouchdb
+    $ npm install
+    $ npm start
 
 ### 3. Create a Cloudant or CouchDB service
 
@@ -65,10 +80,18 @@ Configure CouchDB for a [single-node setup](http://docs.couchdb.org/en/2.1.0/ins
 
 #### Creating a Cloudant NoSQL DB service
 
-Sign up for an [IBM Cloud](https://console.ng.bluemix.net/) account, if you do not already have one.
+To provision a managed Cloudant NoSQL DB
 
-Once you are logged in to IBM Cloud, create a new Cloudant instance on the [Cloudant NoSQL DB Bluemix Catalog](https://console.ng.bluemix.net/catalog/services/cloudant-nosql-db) page. This should take you to a page representing the newly-created service instance. Click the "Service credentials" link. You should have one set of service credentials listed. Click "View credentials" which should show you a JSON object containing your service credentials. Copy the value for the `url` key to your clipboard (the value will be in the form of `https://username:password@uniqueid-bluemix.cloudant.com`).
+* Log in to [IBM Cloud](https://console.ng.bluemix.net/).
+   > Sign up for an account, if you do not already have one.
+* [Provision a Cloudant NoSQL DB _Lite_ plan instance](https://console.bluemix.net/catalog/services/cloudant-nosql-db), which is free.
+  > If desired, you can also re-use an existing Cloudant NoSQL DB service instance. (Open the [**Data & Analytics**  resources dashboard](https://console.bluemix.net/dashboard/data) to see a list of pre-provisioned instances that you have access to.) 
+ * Open the **Service credentials** tab.
+* Add new credentials for this service instance if no credentials have been defined yet.
+* View the credentials and note the value of the **url** property, which has the following format: `https://username:password@username-bluemix.cloudant.com`.
 
+Tip: Select the **Manage** tab and click **Launch** to open the Cloudant dashboard and manage the service instance.
+ 
 ## Database and replication setup
 1. [Create the remote database](#1-create-the-remote-database)
 1. [Enable CORS](#2-enable-cors)
@@ -76,7 +99,9 @@ Once you are logged in to IBM Cloud, create a new Cloudant instance on the [Clou
 
 ### 1. Create the remote database
 
-Use your Cloudant or CouchDB dashboard to create a database. Select the Databases icon on the left and then use the `Create Database` button to create the "shopping-list" database.
+* Use the Cloudant or CouchDB dashboard to create a database.
+
+* Select the Databases tab on the left and then use the `Create Database` button to create the "shopping-list" database.
 The Shopping List app can be used locally before the database exists, but cannot sync
 until the remote database is completed.
 
@@ -84,14 +109,18 @@ until the remote database is completed.
 
 ### 2. Enable CORS
 
-Cross-Origin Resource Sharing (CORS) needs to be enabled. Use your Cloudant or CouchDB dashboard to enable it. The CORS options are under the account settings or config depending on your version. Enable CORS and restrict the domain as needed for security.
+* Open the Cloudant or CouchDB dashboard to enable Cross-Origin Resource Sharing (CORS).  
+
+* Select the Account Settings (or config) tab and open the **CORS** tab.
+
+* Enable CORS and restrict the domain as needed for security.
 
 ![](doc/source/images/enable_cors.png)
 
 ### 3. Set the replication target
 
-Run the Shopping List app and use the *Settings* form to enter your Database URL.
-If you use the Bluemix Cloudant URL taken from the service credentials as described above, the URL includes user and password GUIDs.
+Run the Shopping List app and use the *Settings* form to enter your database URL.
+If you use the IBM Cloud Cloudant URL taken from the service credentials as described above, the URL includes user name and password.
 
 Add `/shopping-list` to the URL to connect to the database that you created.
 
@@ -129,25 +158,25 @@ Refer to https://github.com/IBM/metrics-collector-service#privacy-notice.
 
 To disable tracking, simply remove ``require('metrics-tracker-client').track();`` from the ``app.js`` file in the top level directory.
 
+
+# Tutorial
+
+Refer to the [tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial) for step-by-step instructions on how to build your own Offline First shopping list Progressive Web App with Vanilla JS (aka plain old JavaScript) and PouchDB.
+
 <!--Include any relevant links-->
 
 # Links
-* [Demo on Youtube](https://www.youtube.com/watch?v=Jxi7U7VOMYg)
-* [Watson Node.js SDK](https://github.com/watson-developer-cloud/node-sdk)
-* [Relevancy Training Demo Video](https://www.youtube.com/watch?v=8BiuQKPQZJk)
-* [Relevancy Training Demo Notebook](https://github.com/akmnua/relevancy_passage_bww)
-
-<!-- pick the relevant ones from below -->
-# Learn more
-
-* **Artificial Intelligence Code Patterns**: Enjoyed this Code Pattern? Check out our other [AI Code Patterns](https://developer.ibm.com/code/technologies/artificial-intelligence/).
-* **Data Analytics Code Patterns**: Enjoyed this Code Pattern? Check out our other [Data Analytics Code Patterns](https://developer.ibm.com/code/technologies/data-science/)
-* **AI and Data Code Pattern Playlist**: Bookmark our [playlist](https://www.youtube.com/playlist?list=PLzUbsvIyrNfknNewObx5N7uGZ5FKH0Fde) with all of our Code Pattern videos
-* **With Watson**: Want to take your Watson app to the next level? Looking to utilize Watson Brand assets? [Join the With Watson program](https://www.ibm.com/watson/with-watson/) to leverage exclusive brand, marketing, and tech resources to amplify and accelerate your Watson embedded commercial solution.
-* **Data Science Experience**: Master the art of data science with IBM's [Data Science Experience](https://datascience.ibm.com/)
-* **PowerAI**: Get started or get scaling, faster, with a software distribution for machine learning running on the Enterprise Platform for AI: [IBM Power Systems](https://www.ibm.com/ms-en/marketplace/deep-learning-platform)
-* **Spark on IBM Cloud**: Need a Spark cluster? Create up to 30 Spark executors on IBM Cloud with our [Spark service](https://console.bluemix.net/catalog/services/apache-spark)
-* **Kubernetes on IBM Cloud**: Deliver your apps with the combined the power of [Kubernetes and Docker on IBM Cloud](https://www.ibm.com/cloud-computing/bluemix/containers)
+* [Tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial)
+* [More Shopping List Sample Apps](https://github.com/ibm-watson-data-lab/shopping-list)
+* [Offline First](http://offlinefirst.org/)
+* [Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/)
+* [Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers)
+* [Web App Manifest](https://w3c.github.io/manifest/)
+* [PouchDB](https://pouchdb.com/)
+* [Apache CouchDB](https://couchdb.apache.org/)
+* [IBM Cloudant](https://www.ibm.com/cloud/cloudant)
+* [Vanilla JS](http://vanilla-js.com/)  😂 &nbsp; (aka plain old [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript))
+* [Materialize CSS](http://materializecss.com/getting-started.html)
 
 <!--keep this-->
 
