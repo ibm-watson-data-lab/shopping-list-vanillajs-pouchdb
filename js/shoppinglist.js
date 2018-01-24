@@ -19,7 +19,10 @@
         node = node.elements['title'] || node.elements[0]
       } else if (node.id) {
         var form = document.getElementById('form-' + node.id)
-        if (form) {
+        var more = document.querySelector('#' + node.id + ' .collapsible:first-child:not(.closed) .more-btn')
+        if (more) {
+          node = more
+        } else if (form) {
           node = form.elements['title'] || form.elements[0]
         }
       }
@@ -171,6 +174,23 @@
     }
   }
 
+  // set "aria-hidden" and "tab-index" attributes accordingly when dialog is opened/closed
+  var setAria = function (hide) {
+    if (hide) {
+      var nodes = document.querySelectorAll('header [role="button"], main [role="button"]:not([aria-hidden="true"]), main button:not([aria-hidden="true"]), main input:not([aria-hidden="true"]), main [type="checkbox"]:not([aria-hidden="true"])')
+      for (var i = 0; i < nodes.length; i++) {
+        nodes[i].setAttribute('aria-hidden', 'true')
+        nodes[i].setAttribute('tab-index', '-1')
+      }
+    } else {
+      var hiddennodes = document.querySelectorAll('main [tab-index="-1"], header [tab-index="-1"]')
+      for (var j = 0; j < hiddennodes.length; j++) {
+        hiddennodes[j].setAttribute('aria-hidden', 'false')
+        hiddennodes[j].removeAttribute('tab-index')
+      }
+    }
+  }
+
   var shopper = function (themodel) {
     if (themodel) {
       themodel(function (err, response) {
@@ -207,6 +227,7 @@
     }
     form.reset()
     document.body.className += ' ' + form.id
+    setAria(true)
     formFocus(form)
   }
 
@@ -215,6 +236,7 @@
       .replace('shopping-list-add', '')
       .replace('shopping-list-item-add', '')
       .trim()
+    setAria(false)
   }
 
   shopper.add = function (event) {
@@ -333,6 +355,10 @@
       for (var j = 0; j < inputs.length; j++) {
         inputs[j].value = inputs[j].getAttribute('placeholder')
       }
+      var buttons = document.querySelectorAll('#' + node + ' button, #' + node + ' [role="button"], #' + node + ' input')
+      for (var k = 0; k < buttons.length; k++) {
+        buttons[k].setAttribute('aria-hidden', buttons[k].getAttribute('aria-hidden') !== 'true')
+      }
     } else {
       node.classList.toggle('closed')
       domnode = node
@@ -353,11 +379,13 @@
     }
 
     document.body.className += ' ' + form.id
+    setAria(true)
     formFocus(form)
   }
 
   shopper.closesettings = function () {
     document.body.className = document.body.className.replace('shopping-list-settings', '').trim()
+    setAria(false)
   }
 
   shopper.settings = function (event) {
