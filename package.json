@@ -4,7 +4,7 @@
   "description": "Offline First shopping list app written with plain JavaScript and PouchDB",
   "main": "app.js",
   "scripts": {
-    "test": "standard js/*.js && karma start --single-run --browsers ChromeHeadless karma.conf.js",
+    "test": "standard */*.js *.js && karma start --single-run --browsers ChromeHeadless karma.conf.js",
     "start": "node app.js"
   },
   "repository": {
