@@ -7,8 +7,15 @@
   var db = null
   var dbsync = null
 
-  // Shopping List Schema
-  // https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-example
+  /**
+   * Create a shopping list object corresponding to the Shopping List Schema
+   * https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-example
+   *
+   * @param  {Object} doc
+   *         Properties of the shopping list
+   * @return {Object}
+   *         The document to store in the DB
+   */
   var initListDoc = function (doc) {
     return {
       '_id': 'list:' + cuid(),
@@ -28,8 +35,17 @@
     }
   }
 
-  // Shopping List Item Schema
-  // https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-item-example
+  /**
+   * Create a shopping list item object corresponding to the Shopping List Item Schema
+   * https://github.com/ibm-watson-data-lab/shopping-list#shopping-list-item-example
+   *
+   * @param  {Object} doc
+   *         Properties of the shopping list item
+   * @param  {String} listid
+   *         The ID of the parent shopping list
+   * @return {Object}
+   *         The document to store in the DB
+   */
   var initItemDoc = function (doc, listid) {
     return {
       '_id': 'item:' + cuid(),
@@ -43,6 +59,18 @@
     }
   }
 
+  /**
+   * Log and handle responses from DB requests
+   *
+   * @param  {Object} error
+   *         Any error in handling the request
+   * @param  {Object} response
+   *         The response from the request
+   * @param  {Function} callback
+   *         Callback function to be called
+   * @param  {String} caller
+   *         Name or unique identifier of the initial calling function (for logging purproses)
+   */
   var handleResponse = function (error, response, callback, caller) {
     if (console) {
       console[error ? 'error' : 'log']((caller || ''), (error || response))
@@ -52,6 +80,12 @@
     }
   }
 
+  /**
+   * Initiates the shopping list model object (creates DB and index)
+   *
+   * @param  {Function} callback
+   *         The function to be called once model is initiated or fails initiation
+   */
   var model = function (callback) {
     db = new PouchDB('shopping')
 
@@ -70,6 +104,12 @@
     })
   }
 
+  /**
+   * Finds all shopping lists in the DB
+   *
+   * @param  {Function} callback
+   *         The function to be called with the reponse
+   */
   model.lists = function (callback) {
     db.find({
       selector: {
@@ -81,6 +121,14 @@
     })
   }
 
+  /**
+   * Store the shopping list doc or shopping list item doc into the DB
+   *
+   * @param  {Object} d
+   *         The shopping list or shopping list item to be stored
+   * @param  {Function} callback
+   *         The function to be called with the reponse
+   */
   model.save = function (d, callback) {
     var doc = null
     if (d._id) {
@@ -101,13 +149,30 @@
     }
   }
 
+  /**
+   * Retrieve a shopping list or shopping list item from the DB
+   *
+   * @param  {String} id
+   *         The ID of shopping list or shopping list item to be retrieved
+   * @param  {Function} callback
+   *         The function to be called with the reponse
+   */
   model.get = function (id, callback) {
     db.get(id, function (err, doc) {
       handleResponse(err, doc, callback, 'model.get')
     })
   }
 
+  /**
+   * Delete a shopping list or shopping list item from the DB
+   *
+   * @param  {String} id
+   *         The ID of shopping list or shopping list item to be deleted
+   * @param  {Function} callback
+   *         The function to be called with the reponse
+   */
   model.remove = function (id, callback) {
+    // delet doc using with the given id and revision
     function deleteRev (rev) {
       db.remove(id, rev, function (err, response) {
         handleResponse(err, response, callback, 'model.remove')
@@ -115,11 +180,12 @@
     }
 
     if (id) {
+      // get the doc to be deleted
       db.get(id, function (err, doc) {
         if (err) {
           handleResponse(err, doc, callback, 'model.remove.get')
         } else if (doc.type === 'list') {
-          // remove all children
+          // 1. get all shopping list items belonging to the shopping list
           model.items(doc._id, function (err, response) {
             if (err) {
               console.error('model.remove.items', err)
@@ -131,18 +197,22 @@
                   item._deleted = true
                   return item
                 })
+                // 2. delete all shopping list items
                 db.bulkDocs(markfordeletion, function (err, response) {
                   if (err) {
                     console.error('model.remove.bulkDocs', err)
                   }
+                  // 3. delete shopping list
                   deleteRev(doc._rev)
                 })
               } else {
+                // delete shopping list
                 deleteRev(doc._rev)
               }
             }
           })
         } else {
+          // delete shopping lsit
           deleteRev(doc._rev)
         }
       })
@@ -151,6 +221,14 @@
     }
   }
 
+  /**
+   * Find all shopping list items in the DB for a given shopping list
+   *
+   * @param  {String} listid
+   *         The ID of shopping list to find the items for
+   * @param  {Function} callback
+   *         The function to be called with the reponse
+   */
   model.items = function (listid, callback) {
     db.find({
       selector: {
@@ -163,28 +241,50 @@
     })
   }
 
+  /**
+   * Get or set the settings for the shopping list app
+   *
+   * @param  {Object} settings
+   *         The settings to be stored in the DB (or null if retrieving settings)
+   * @param  {Function} callback
+   *         The function to be called with the reponse
+   */
   model.settings = function (settings, callback) {
     var id = '_local/user'
     var cb = callback || settings
     if (callback && settings && typeof settings === 'object') {
+      // 1. get existing settings from DB
       db.get(id, function (err, doc) {
         settings._id = id
         if (err) {
           console.error(err)
         } else {
+          // 2. update revision
           settings._rev = doc._rev
         }
+        // 3. store new settings in DB
         db.put(settings, function (err, response) {
           handleResponse(err, response, cb, 'model.settings.put')
         })
       })
     } else {
+      // get existing settings
       db.get(id, function (err, doc) {
         handleResponse(err, doc, cb, 'model.settings.get')
       })
     }
   }
 
+  /**
+   * Synchronize local DB with remote DB
+   *
+   * @param  {String} remoteDB
+   *         The fully qualified URL for the remote DB
+   * @param  {Function} oncomplete
+   *         The function to be called when sync 'complete' event is received
+   * @param  {Function} onchange
+   *         The function to be called when sync 'change' event is received
+   */
   model.sync = function (remoteDB, oncomplete, onchange) {
     if (dbsync) {
       dbsync.cancel()

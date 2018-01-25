@@ -1,8 +1,11 @@
 /* global self, caches, fetch */
 'use strict'
 
+// cache name
+// when changed invalidates previous caches
 var CACHE_NAME = 'shopping-list-vanillajs-pouchdb-0.0.5'
 
+// assets to be cached
 var urlstocache = [
   '/shopping-list-vanillajs-pouchdb',
   '/shopping-list-vanillajs-pouchdb/',
@@ -26,6 +29,15 @@ var urlstocache = [
   'js/shoppinglist.model.js'
 ]
 
+/**
+ * Makes a network call for the request (and caches any fonts.gstatic.com requests)
+ *
+ * @param  {Object} request
+ * @param  {Object} cache
+ *         Store fonts.gstatic.com responses
+ * @return {Object}
+ *         The response from the network request
+ */
 var fromnetwork = function (request, cache) {
   return fetch(request).then(function (response) {
     if (request.url.indexOf('https://fonts.gstatic.com') === 0) {
@@ -38,7 +50,8 @@ var fromnetwork = function (request, cache) {
   })
 }
 
-// install/cache page assets
+// service worker installed
+// cache page assets
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -50,6 +63,7 @@ self.addEventListener('install', function (event) {
 })
 
 // intercept page requests
+// looks for  response in the cache before attempting network call
 self.addEventListener('fetch', function (event) {
   console.log('fetch', event.request.url)
   event.respondWith(
@@ -66,7 +80,8 @@ self.addEventListener('fetch', function (event) {
   )
 })
 
-// service worker activated, remove outdated cache
+// service worker activated
+// remove outdated cache
 self.addEventListener('activate', function (event) {
   console.log('worker activated')
   event.waitUntil(
