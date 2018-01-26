@@ -190,12 +190,14 @@ The shopping list can be deployed to and accessed from GitHub Pages.
 1. Create a new `gh-pages` branch and check it out, with the command: `git checkout -b gh-pages`.
 2. Edit the `gh-pages` branch keeping only files needed to serve up the application contain i.e., delete all files **except**:
 	- `index.html`
+	- `worker.js`
+	- `manifest.json`
 	- files in the `css` directory
 	- files in the `favicons` directory
 	- files in the `js` directory
 3. Push the `gh-pages` branch to GitHub: `git push origin gh-pages`
 
-Once `gh-pages` has been pushed, it may take a few minutes, but teh shopping list should be accessible via the repository's GitHub Pages url.
+Once `gh-pages` has been pushed, it may take a few minutes, but the shopping list should be accessible via the repository's GitHub Pages url.
 
 # Privacy Notice
 
