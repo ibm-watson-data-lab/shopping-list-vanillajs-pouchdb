@@ -227,7 +227,8 @@ body.shopping-list-item-add .item-bottom-sheet {
 
 body.shopping-list-add .modal-overlay,
 body.shopping-list-item-add .modal-overlay,
-body.shopping-list-settings .modal-overlay {
+body.shopping-list-settings .modal-overlay,
+body.shopping-list-about .modal-overlay {
   display: block;
   opacity: 0.5;
 	transition-property: all;
@@ -257,7 +258,8 @@ body[data-list-id] #shopping-list-items {
   will-change: bottom, opacity;
 }
 
-body.shopping-list-settings .settings-top-sheet {
+body.shopping-list-settings .settings-top-sheet,
+body.shopping-list-about .about-top-sheet {
   z-index: 1007;
   display: block;
   top: 0px;
@@ -284,13 +286,13 @@ body.shopping-list-settings .settings-top-sheet {
   font-weight: 300;
 }
 
-body.shopping-list-error-sync nav a.settings:first-of-type,
-body:not(.shopping-list-error-sync) nav a.settings:last-of-type  {
+body.shopping-list-error-sync nav a.settings.settings-btn,
+body:not(.shopping-list-error-sync) nav a.settings.error-btn  {
   display: none;
 }
 
-body:not(.shopping-list-error-sync) nav a.settings:first-of-type,
-body.shopping-list-error-sync nav a.settings:last-of-type  {
+body:not(.shopping-list-error-sync) nav a.settings.settings-btn,
+body.shopping-list-error-sync nav a.settings.error-btn  {
   display: initial;
 }
 

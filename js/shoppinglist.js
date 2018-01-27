@@ -471,6 +471,22 @@
   }
 
   /**
+   * Open the 'About' dialog
+   */
+  shopper.openabout = function () {
+    document.body.className += ' shopping-list-about'
+    setAria(true)
+  }
+
+  /**
+   * Close the 'About' dialog
+   */
+  shopper.closeabout = function () {
+    document.body.className = document.body.className.replace('shopping-list-about', '').trim()
+    setAria(false)
+  }
+
+  /**
    * Open the 'Settings' dialog
    */
   shopper.opensettings = function () {
