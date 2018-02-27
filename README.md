@@ -53,6 +53,9 @@ In combination with the Service Worker used for caching, a manifest file contain
 
 Explore the code in this GitHub repository to see how the Offline First design is applied.
 
+# Watch the Video
+[![](https://i.ytimg.com/vi/2cvKUoeQoHA/0.jpg)](https://youtu.be/2cvKUoeQoHA)
+
 # Tutorial
 
 Refer to the [tutorial](https://github.com/ibm-watson-data-lab/shopping-list-vanillajs-pouchdb/tree/master/tutorial) for step-by-step instructions on how to build your own Offline First shopping list Progressive Web App with Vanilla JS (aka plain old JavaScript) and PouchDB.
